@@ -8,47 +8,54 @@
 <style>
 :root{
   --navy:#1b2a4a; --blue:#2e6fd8; --amber:#c9872d; --green:#3a9d63; --red:#d64541;
-  --ink:#2b3240; --bg:#f6f8fb; --card:#ffffff; --line:#e6ebf2;
+  --ink:#2b3240; --bg:#f6f8fb; --card:#fff; --line:#e6ebf2;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
-.hero{background:linear-gradient(135deg,#1b2a4a,#24406b 55%,#2e6fd8);color:#fff;padding:38px 22px 30px;text-align:center}
-.hero h1{font-size:30px;letter-spacing:1px;margin-bottom:10px}
-.hero .sub{font-size:14px;opacity:.9;margin-bottom:20px}
+.hero{background:linear-gradient(135deg,#1b2a4a,#24406b 55%,#2e6fd8);color:#fff;padding:36px 22px 28px;text-align:center}
+.hero h1{font-size:28px;letter-spacing:1px;margin-bottom:10px}
+.hero .sub{font-size:14px;opacity:.9;margin-bottom:18px}
 .flights{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.flight{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:12px 18px;font-size:13px;text-align:left;min-width:230px;backdrop-filter:blur(4px)}
+.flight{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:11px 17px;font-size:13px;text-align:left;min-width:235px}
 .flight .tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:999px;margin-bottom:6px}
 .flight .go{background:#2fb98c}.flight .back{background:#e58f2b}
-.flight b{font-size:15px}
-.flight div{opacity:.92;margin-top:3px}
-.wrap{max-width:1080px;margin:0 auto;padding:22px}
-.legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:12.5px;color:#5a6474;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 16px;margin-bottom:20px}
+.flight b{font-size:15px}.flight div{opacity:.92;margin-top:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:20px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;font-size:12.5px;color:#5a6474;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 15px;margin-bottom:18px}
 .legend span{display:flex;align-items:center;gap:6px}
-.dot{width:12px;height:12px;border-radius:50%;display:inline-block}
-.dot.amber{background:var(--amber)} .dot.green{background:var(--green)} .dot.blue{background:var(--blue)} .dot.purple{background:#8e6bd8}
-.line{display:inline-block;width:22px;height:3px;border-radius:2px}
-.line.red{background:var(--red)} .line.blue{background:var(--blue)}
-section.city{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:24px;overflow:hidden}
-.city-h{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line)}
-.city-h h2{font-size:20px;color:var(--navy);display:flex;align-items:center;gap:10px}
+.dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+.dot.amber{background:var(--amber)}.dot.green{background:var(--green)}.dot.blue{background:var(--blue)}.dot.purple{background:#8e6bd8}
+.seq{display:inline-block;width:16px;height:16px;border-radius:50%;background:#5a6474;color:#fff;font-size:10px;font-weight:700;text-align:center;line-height:16px}
+section.city{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:22px;overflow:hidden}
+.city-h{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--line)}
+.city-h h2{font-size:19px;color:var(--navy);display:flex;align-items:center;gap:9px}
 .city-h .badge{font-size:12px;background:#e9f0fb;color:var(--blue);padding:2px 10px;border-radius:999px}
 .body{display:grid;grid-template-columns:1fr 1fr;gap:0}
-.days{padding:6px 20px 18px;border-right:1px solid var(--line)}
-.day{padding:10px 0;border-bottom:1px dashed var(--line)}
+.days{padding:4px 20px 16px;border-right:1px solid var(--line)}
+.day{padding:9px 0;border-bottom:1px dashed var(--line)}
 .day:last-child{border-bottom:none}
-.day .d{font-weight:700;color:var(--blue);font-size:14px}
+.day .d{font-weight:700;font-size:13px}
 .day .t{font-size:15px;font-weight:700;color:var(--ink);margin:1px 0 3px}
 .day ul{margin:4px 0 0 18px;font-size:13px;color:#4a5364}
-.map{padding:12px}
-#map-tokyo,#map-kamakura,#map-osaka,#map-kyoto,#map-japan{height:480px;border-radius:12px;border:1px solid var(--line)}
-.mobile-only{display:none}
-.foot{text-align:center;font-size:12px;color:#9aa3b2;padding:8px 0 26px}
+.map{padding:12px;position:relative}
+#map-japan,#map-tokyo,#map-kamakura,#map-osaka,#map-kyoto{height:470px;border-radius:12px;border:1px solid var(--line)}
+/* 点位序号 pin */
+.pin{width:26px;height:26px;border-radius:50%;border:2px solid #fff;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.pin.amber{background:#c9872d}.pin.green{background:#3a9d63}.pin.blue{background:#2e6fd8}.pin.purple{background:#8e6bd8}.pin.gray{background:#7d8797}
+/* 地图内局部图例 */
+.map-leg{background:rgba(255,255,255,.95);border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-size:12px;color:#3a4356;max-width:190px;line-height:1.7}
+.map-leg .ml-t{font-weight:700;color:var(--navy);margin-bottom:5px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.map-leg .ml-i{display:flex;align-items:center;gap:6px}
+.sw{width:20px;height:4px;border-radius:2px;display:inline-block;flex:none}
+.day-tag{background:#e9f0fb;color:#2e6fd8;font-size:11px;padding:0 6px;border-radius:999px;margin-right:4px}
+.leaflet-tooltip{font-size:12px!important}
+.foot{text-align:center;font-size:12px;color:#9aa3b2;padding:6px 0 24px}
 .foot a{color:var(--blue)}
 @media(max-width:820px){
   .body{grid-template-columns:1fr}
   .days{border-right:none;border-bottom:1px solid var(--line)}
-  #map-tokyo,#map-kamakura,#map-osaka,#map-kyoto{height:360px}
-  .hero h1{font-size:24px}
+  #map-japan,#map-tokyo,#map-kamakura,#map-osaka,#map-kyoto{height:360px}
+  .hero h1{font-size:22px}
 }
 </style>
 </head>
@@ -68,160 +75,167 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
     <span><span class="dot amber"></span>二奢/买手店</span>
     <span><span class="dot green"></span>景点/公园</span>
     <span><span class="dot blue"></span>车站/交通</span>
-    <span><span class="dot purple"></span>市区/商圈</span>
-    <span><span class="line red"></span>citywalk 步行路线</span>
-    <span><span class="line blue"></span>新干线</span>
+    <span><span class="dot purple"></span>商圈/市区</span>
+    <span><span class="seq">1</span>数字 = 当天走访顺序</span>
+    <span>彩色连线 = 当天路线(见每图右上角图例)</span>
   </div>
 
-  <!-- 城际总览 -->
   <section class="city">
     <div class="city-h"><h2>🗾 城际概览</h2><span class="badge">东京 → 大阪 新干线约2.5-3h</span></div>
     <div class="map"><div id="map-japan"></div></div>
   </section>
 
-  <!-- 东京 -->
   <section class="city">
     <div class="city-h"><h2>🏙 东京 · 二奢 citywalk</h2><span class="badge">9/26 - 9/30</span></div>
     <div class="body">
       <div class="days">
-        <div class="day"><div class="d">9/26 周六</div><div class="t">抵达 · 入住</div><ul><li>14:30 羽田落地 → 进城入住(新宿/银座/涉谷)</li><li>晚上 神乐坂小巷 或 惠比寿 吃饭倒时差</li></ul></div>
-        <div class="day"><div class="d">9/27 周日</div><div class="t">代官山 · 中目黑</div><ul><li>代官山：Lily / Hedy's 精品中古(Chanel/Hermès古董款)</li><li>茑屋书店 T-SITE · Log Road</li><li>中目黑：蓝瓶咖啡 · 目黑川 · 杂货</li></ul></div>
-        <div class="day"><div class="d">9/28 周一</div><div class="t">表参道 · 原宿 · 青山</div><ul><li>KOMEHYO VINTAGE atelier(Hermès Lindy + Chrome Hearts)</li><li>MixTHINKS 两层 LV 朝圣地</li><li>RAGTAG / Chicago(原宿联名)</li><li>晚上 六本木看展+喝酒(可选)</li></ul></div>
-        <div class="day"><div class="d">9/29 周二</div><div class="t">镰仓 当天往返</div><ul><li>江之岛 → 镰仓大佛 → 鹤冈八幡宫</li><li>江之电沿线 · 小町通</li></ul></div>
-        <div class="day"><div class="d">9/30 周三</div><div class="t">银座 或 下北泽 · 移动</div><ul><li>银座连锁一站式(KOMEHYO本店/大黑屋/Brand Off) 或 下北泽性价比(Chicago/2nd Street)</li><li>中午 新干线 → 大阪</li></ul></div>
+        <div class="day"><div class="d">9/26 周六 · <span style="color:#d64541">红</span></div><div class="t">抵达 · 入住</div><ul><li>14:30 羽田落地 → 进城入住(新宿/银座/涉谷)</li><li>晚上 神乐坂小巷 或 惠比寿 吃饭倒时差</li></ul></div>
+        <div class="day"><div class="d">9/27 周日 · <span style="color:#2e6fd8">蓝</span></div><div class="t">代官山 · 中目黑</div><ul><li>① 代官山 Lily / Hedy's 精品中古</li><li>② 茑屋书店 T-SITE</li><li>③ 中目黑 蓝瓶咖啡 · 杂货</li></ul></div>
+        <div class="day"><div class="d">9/28 周一 · <span style="color:#c9872d">橙</span></div><div class="t">表参道 · 原宿</div><ul><li>① KOMEHYO VINTAGE atelier</li><li>② MixTHINKS(LV)</li><li>③ RAGTAG / Chicago(原宿)</li><li>晚 六本木看展+喝酒(可选)</li></ul></div>
+        <div class="day"><div class="d">9/29 周二 · <span style="color:#3a9d63">绿</span></div><div class="t">镰仓 当天往返</div><ul><li>江之岛 → 镰仓大佛 → 八幡宫 · 小町通</li></ul></div>
+        <div class="day"><div class="d">9/30 周三 · <span style="color:#8e6bd8">紫</span></div><div class="t">银座/下北泽 · 移动</div><ul><li>① 银座连锁(KOMEHYO本店/大黑屋)</li><li>② 东京站 → 新干线去大阪</li><li>备选 下北泽(性价比)</li></ul></div>
       </div>
       <div class="map"><div id="map-tokyo"></div></div>
     </div>
   </section>
 
-  <!-- 镰仓 -->
   <section class="city">
-    <div class="city-h"><h2>⛩ 镰仓 · 湘南海岸</h2><span class="badge">9/29 当天往返</span></div>
+    <div class="city-h"><h2>⛩ 镰仓 · 湘南海岸</h2><span class="badge">9/29 当天往返 · <span style="color:#3a9d63">绿</span></span></div>
     <div class="body">
       <div class="days">
-        <div class="day"><div class="d">9/29 周二</div><div class="t">江之岛 · 古都</div><ul><li>江之岛海边 · 展望台</li><li>江ノ電 沿海电车</li><li>镰仓大佛(高德院)</li><li>鹤冈八幡宫 · 小町通</li></ul></div>
+        <div class="day"><div class="d">9/29 周二 · <span style="color:#3a9d63">绿</span></div><div class="t">江之岛 · 古都</div><ul><li>① 江之岛海边 · 展望台</li><li>② 江ノ電 沿海电车</li><li>③ 镰仓大佛(高德院)</li><li>④ 鹤冈八幡宫 · 小町通</li></ul></div>
       </div>
       <div class="map"><div id="map-kamakura"></div></div>
     </div>
   </section>
 
-  <!-- 大阪 -->
   <section class="city">
     <div class="city-h"><h2>🍜 大阪 · 关西</h2><span class="badge">9/30 晚 - 10/4</span></div>
     <div class="body">
       <div class="days">
-        <div class="day"><div class="d">9/30 周三</div><div class="t">新干线 → 大阪</div><ul><li>傍晚 道顿堀 · 心斋桥 晚餐</li></ul></div>
-        <div class="day"><div class="d">10/1 周四</div><div class="t">大阪城 · 市井</div><ul><li>大阪城公园 → 黑门市场</li><li>通天阁 · 新世界</li><li>晚上 梅田蓝天大厦夜景</li></ul></div>
-        <div class="day"><div class="d">10/2 周五</div><div class="t">京都①</div><ul><li>伏见稻荷大社 → 三十三间堂</li><li>清水寺 · 二年坂三年坂</li><li>祇园 · 花见小路</li></ul></div>
-        <div class="day"><div class="d">10/3 周六</div><div class="t">京都②</div><ul><li>岚山 竹林 · 渡月桥</li><li>金阁寺 · 龙安寺</li></ul></div>
-        <div class="day"><div class="d">10/4 周日</div><div class="t">大阪收尾</div><ul><li>心斋桥购物 · 难波</li><li>晚上住 大阪市区 或 临空城(近机场)</li></ul></div>
+        <div class="day"><div class="d">9/30 周三 · <span style="color:#d64541">红</span></div><div class="t">新干线 → 大阪</div><ul><li>① 道顿堀 · ② 心斋桥 晚餐</li></ul></div>
+        <div class="day"><div class="d">10/1 周四 · <span style="color:#2e6fd8">蓝</span></div><div class="t">大阪城 · 市井</div><ul><li>① 大阪城公园 → ② 黑门市场</li><li>③ 通天阁 · 新世界 → ④ 梅田夜景</li></ul></div>
+        <div class="day"><div class="d">10/2 周五 · <span style="color:#c9872d">橙</span></div><div class="t">京都①</div><ul><li>① 伏见稻荷 → ② 清水寺 · 二年坂</li><li>③ 祇园 · 花见小路</li></ul></div>
+        <div class="day"><div class="d">10/3 周六 · <span style="color:#3a9d63">绿</span></div><div class="t">京都②</div><ul><li>① 岚山 竹林 · 渡月桥 → ② 金阁寺</li></ul></div>
+        <div class="day"><div class="d">10/4 周日 · <span style="color:#8e6bd8">紫</span></div><div class="t">大阪收尾</div><ul><li>心斋桥购物 · 难波,晚上住大阪/临空城</li></ul></div>
       </div>
       <div class="map"><div id="map-osaka"></div></div>
     </div>
   </section>
 
-  <!-- 京都 -->
   <section class="city">
     <div class="city-h"><h2>⛩ 京都 · 古都</h2><span class="badge">10/2 - 10/3</span></div>
     <div class="body">
       <div class="days">
-        <div class="day"><div class="d">10/2 周五</div><div class="t">东山 · 稻荷</div><ul><li>伏见稻荷大社(千本鸟居)</li><li>清水寺 · 二年坂</li><li>祇园 · 花见小路</li></ul></div>
-        <div class="day"><div class="d">10/3 周六</div><div class="t">岚山 · 金阁</div><ul><li>岚山竹林 · 渡月桥</li><li>金阁寺 · 龙安寺</li></ul></div>
+        <div class="day"><div class="d">10/2 周五 · <span style="color:#c9872d">橙</span></div><div class="t">东山 · 稻荷</div><ul><li>① 伏见稻荷(千本鸟居)</li><li>② 清水寺 · 二年坂</li><li>③ 祇园 · 花见小路</li></ul></div>
+        <div class="day"><div class="d">10/3 周六 · <span style="color:#3a9d63">绿</span></div><div class="t">岚山 · 金阁</div><ul><li>① 岚山竹林 · 渡月桥</li><li>② 金阁寺 · 龙安寺</li></ul></div>
       </div>
       <div class="map"><div id="map-kyoto"></div></div>
     </div>
   </section>
 
-  <div class="foot">二奢店位置为街区示意,以实际门店为准 · 地图 © OpenStreetMap · 数据 Leaflet</div>
+  <div class="foot">二奢店位置为街区示意,以实际门店为准 · 数字=当天先后顺序 · 地图 © OpenStreetMap · Leaflet</div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 const TILE='https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const ATTR='&copy; OpenStreetMap';
-const mk=(c)=>L.circleMarker(c,{radius:7,color:'#fff',weight:2,fillColor:COLOR,c,fillOpacity:.95});
-// markers: [name, lat, lng, type, desc]
+const TMAP={amber:'#c9872d',green:'#3a9d63',blue:'#2e6fd8',purple:'#8e6bd8',gray:'#7d8797'};
+// pts: [name,lat,lng,type,desc,day,order]  order<=0 不显示序号
 const DATA={
- tokyo:{center:[35.655,139.71],zoom:14,
+ japan:{center:[35.4,138.2],zoom:6,city:'城际',
+   routes:[{c:'#2e6fd8',pts:[[35.6812,139.7671],[34.7334,135.5002]],label:'新干线 东京→大阪 约2.5-3h'}],
    pts:[
-    ['代官山 · Lily / Hedy\'s',35.6494,139.7032,'amber','精品中古买手店 · Chanel/Hermès古董款 · 9/27'],
-    ['茑屋书店 T-SITE',35.6495,139.7025,'green','代官山地标书店 · 9/27'],
-    ['中目黑 · 蓝瓶咖啡',35.6439,139.6983,'green','目黑川畔 · 杂货咖啡 · 9/27'],
-    ['表参道 · KOMEHYO VINTAGE',35.6647,139.7097,'amber','atelier工作室概念 · Hermès Lindy + Chrome Hearts · 9/28'],
-    ['MixTHINKS',35.6640,139.7085,'amber','两层 LV 朝圣地 · 9/28'],
-    ['原宿 · RAGTAG/Chicago',35.6699,139.7018,'amber','二手潮牌联名 · 9/28'],
-    ['六本木(艺术)',35.6645,139.7300,'purple','国立新美术馆/21_21 · 晚间可选'],
-    ['银座 · KOMEHYO本店',35.6728,139.7639,'amber','最大连锁 · 劳力士→LV · 9/30'],
-    ['银座 · 大黑屋',35.6717,139.7645,'amber','中古连锁 · 9/30'],
-    ['下北泽(备选)',35.6617,139.6664,'amber','极致性价比 · Chicago/2nd Street · 9/30'],
-    ['东京站(新干线)',35.6812,139.7671,'blue','9/30 → 大阪'],
-   ],
-   routes:[
-    {c:'red',pts:[[35.6494,139.7032],[35.6495,139.7025],[35.6442,139.6986],[35.6439,139.6983]],label:'9/27 代官山→中目黑'},
-    {c:'red',pts:[[35.6647,139.7097],[35.6640,139.7085],[35.6699,139.7018],[35.6639,139.7014]],label:'9/28 表参道→原宿'},
-    {c:'red',pts:[[35.6728,139.7639],[35.6717,139.7645],[35.6717,139.7650],[35.6812,139.7671]],label:'9/30 银座→东京站'},
+    ['东京',35.6812,139.7671,'blue','9/26-9/30','9/26-9/30',1],
+    ['镰仓',35.3192,139.5467,'green','9/29','',2],
+    ['大阪',34.6937,135.5023,'blue','9/30-10/4','',3],
+    ['京都',35.0116,135.7681,'green','10/2-10/3','',4],
+    ['东京站(新干线)',35.6812,139.7671,'gray','→ 大阪','',0],
    ]},
- kamakura:{center:[35.315,139.54],zoom:12,
-   pts:[
-    ['江之岛',35.2993,139.4811,'green','海边展望台 · 9/29'],
-    ['镰仓大佛(高德院)',35.3167,139.5363,'green','9/29'],
-    ['鹤冈八幡宫',35.3255,139.5622,'green','9/29'],
-    ['小町通',35.3200,139.5537,'purple','商店街 · 9/29'],
-   ],
+ tokyo:{center:[35.665,139.71],zoom:14,city:'东京',
    routes:[
-    {c:'red',pts:[[35.2993,139.4811],[35.308,139.505],[35.3167,139.5363],[35.3200,139.5537],[35.3255,139.5622]],label:'江之岛→江ノ電→八幡宫'},
+     {c:'#d64541',pts:[[35.6914,139.7317],[35.6847,139.7453]],label:'9/26 抵达(新宿/银座)'},
+     {c:'#2e6fd8',pts:[[35.6494,139.7032],[35.6495,139.7025],[35.6442,139.6986],[35.6439,139.6983]],label:'9/27 代官山→中目黑'},
+     {c:'#c9872d',pts:[[35.6647,139.7097],[35.6640,139.7085],[35.6699,139.7018],[35.6639,139.7014]],label:'9/28 表参道→原宿→涩谷'},
+     {c:'#8e6bd8',pts:[[35.6728,139.7639],[35.6717,139.7645],[35.6812,139.7671]],label:'9/30 银座→东京站'},
+   ],
+   pts:[
+    ['代官山 · Lily / Hedy\'s',35.6494,139.7032,'amber','精品中古买手店 · Chanel/Hermès古董款','9/27',1],
+    ['茑屋书店 T-SITE',35.6495,139.7025,'green','代官山地标书店','9/27',2],
+    ['中目黑 · 蓝瓶咖啡',35.6439,139.6983,'green','目黑川畔 · 杂货咖啡','9/27',3],
+    ['表参道 · KOMEHYO VINTAGE',35.6647,139.7097,'amber','atelier · Hermès Lindy + Chrome Hearts','9/28',1],
+    ['MixTHINKS',35.6640,139.7085,'amber','两层 LV 朝圣地','9/28',2],
+    ['原宿 · RAGTAG/Chicago',35.6699,139.7018,'amber','二手潮牌联名','9/28',3],
+    ['六本木(艺术·晚)',35.6645,139.7300,'purple','国立新美术馆/21_21 · 晚间可选','9/28',0],
+    ['银座 · KOMEHYO本店',35.6728,139.7639,'amber','最大连锁 · 劳力士→LV','9/30',1],
+    ['银座 · 大黑屋',35.6717,139.7645,'amber','中古连锁','9/30',2],
+    ['下北泽(备选)',35.6617,139.6664,'amber','极致性价比 · Chicago/2nd Street','9/30',0],
+    ['东京站(新干线)',35.6812,139.7671,'blue','→ 大阪','9/30',3],
    ]},
- osaka:{center:[34.68,135.51],zoom:13,
+ kamakura:{center:[35.315,139.54],zoom:12,city:'镰仓',
+   routes:[{c:'#3a9d63',pts:[[35.2993,139.4811],[35.308,139.505],[35.3167,139.5363],[35.3200,139.5537],[35.3255,139.5622]],label:'9/29 江之岛→江ノ電→八幡宫'}],
    pts:[
-    ['大阪城公园',34.6873,135.5261,'green','10/1'],
-    ['黑门市场',34.6667,135.5075,'green','10/1'],
-    ['通天阁 · 新世界',34.6526,135.5061,'green','10/1'],
-    ['梅田蓝天大厦',34.7055,135.4912,'purple','夜景 · 10/1'],
-    ['道顿堀',34.6688,135.5005,'purple','美食街 · 9/30晚'],
-    ['心斋桥',34.6751,135.5012,'purple','购物 · 10/4'],
-    ['新大阪站(新干线)',34.7334,135.5002,'blue','9/30 到达'],
-   ],
-   routes:[
-    {c:'red',pts:[[34.6873,135.5261],[34.6667,135.5075],[34.6526,135.5061],[34.7055,135.4912]],label:'10/1 城→市井→梅田'},
-    {c:'red',pts:[[34.6688,135.5005],[34.6751,135.5012]],label:'道顿堀→心斋桥'},
+    ['江之岛',35.2993,139.4811,'green','海边展望台','9/29',1],
+    ['镰仓大佛(高德院)',35.3167,139.5363,'green','国宝大佛','9/29',3],
+    ['鹤冈八幡宫',35.3255,139.5622,'green','神社','9/29',4],
+    ['小町通',35.3200,139.5537,'purple','商店街','9/29',5],
+    ['江ノ電(沿线)',35.308,139.505,'blue','沿海电车','9/29',2],
    ]},
- kyoto:{center:[35.00,135.76],zoom:13,
-   pts:[
-    ['伏见稻荷大社',34.9671,135.7727,'green','千本鸟居 · 10/2'],
-    ['清水寺',34.9949,135.7857,'green','10/2'],
-    ['二年坂/三年坂',34.9950,135.7833,'purple','和服老街 · 10/2'],
-    ['祇园 · 花见小路',35.0037,135.7788,'purple','10/2'],
-    ['岚山 · 竹林',35.0092,135.6668,'green','10/3'],
-    ['金阁寺',35.0394,135.7292,'green','10/3'],
-    ['京都站',34.9858,135.7588,'blue','交通'],
-   ],
+ osaka:{center:[34.68,135.51],zoom:13,city:'大阪',
    routes:[
-    {c:'red',pts:[[34.9671,135.7727],[34.9949,135.7857],[35.0037,135.7788]],label:'10/2 稻荷→清水寺→祇园'},
-    {c:'red',pts:[[35.0092,135.6668],[35.0394,135.7292]],label:'10/3 岚山→金阁寺'},
+     {c:'#d64541',pts:[[34.6688,135.5005],[34.6751,135.5012]],label:'9/30 道顿堀→心斋桥'},
+     {c:'#2e6fd8',pts:[[34.6873,135.5261],[34.6667,135.5075],[34.6526,135.5061],[34.7055,135.4912]],label:'10/1 大阪城→黑门→通天阁→梅田'},
+     {c:'#8e6bd8',pts:[[34.6751,135.5012],[34.6637,135.5017]],label:'10/4 心斋桥→难波收尾'},
+   ],
+   pts:[
+    ['道顿堀',34.6688,135.5005,'purple','美食街','9/30',1],
+    ['心斋桥',34.6751,135.5012,'purple','购物','9/30/10/4',2],
+    ['大阪城公园',34.6873,135.5261,'green','天守阁','10/1',1],
+    ['黑门市场',34.6667,135.5075,'green','市场','10/1',2],
+    ['通天阁 · 新世界',34.6526,135.5061,'green','展望','10/1',3],
+    ['梅田蓝天大厦',34.7055,135.4912,'purple','夜景','10/1',4],
+    ['新大阪站',34.7334,135.5002,'blue','新干线','9/30',0],
    ]},
- japan:{center:[35.4,138.2],zoom:6,
-   pts:[
-    ['东京',35.6812,139.7671,'blue','9/26-9/30'],
-    ['镰仓',35.3192,139.5467,'green','9/29'],
-    ['大阪',34.6937,135.5023,'blue','9/30-10/4'],
-    ['京都',35.0116,135.7681,'green','10/2-10/3'],
-   ],
+ kyoto:{center:[35.00,135.76],zoom:13,city:'京都',
    routes:[
-    {c:'blue',pts:[[35.6812,139.7671],[34.7334,135.5002]],label:'新干线 东京→大阪 约2.5-3h'},
+     {c:'#c9872d',pts:[[34.9671,135.7727],[34.9949,135.7857],[34.9950,135.7833],[35.0037,135.7788]],label:'10/2 伏见稻荷→清水寺→祇园'},
+     {c:'#3a9d63',pts:[[35.0092,135.6668],[35.0394,135.7292]],label:'10/3 岚山→金阁寺'},
+   ],
+   pts:[
+    ['伏见稻荷大社',34.9671,135.7727,'green','千本鸟居','10/2',1],
+    ['清水寺',34.9949,135.7857,'green','本堂','10/2',2],
+    ['二年坂/三年坂',34.9950,135.7833,'purple','和服老街','10/2',3],
+    ['祇园 · 花见小路',35.0037,135.7788,'purple','艺伎街区','10/2',4],
+    ['岚山 · 竹林',35.0092,135.6668,'green','竹林小径','10/3',1],
+    ['金阁寺',35.0394,135.7292,'green','黄金楼阁','10/3',2],
    ]},
 };
 function render(id,cfg){
   const m=L.map(id,{scrollWheelZoom:true}).setView(cfg.center,cfg.zoom);
   L.tileLayer(TILE,{attribution:ATTR}).addTo(m);
-  const colorMap={amber:'#c9872d',green:'#3a9d63',blue:'#2e6fd8',purple:'#8e6bd8'};
+  // 顺序路线
   cfg.routes.forEach(r=>{
-    L.polyline(r.pts,{color:colorMap[r.c]||r.c,weight:4,opacity:.8,dashArray:r.c==='blue'?'10 8':null})
-     .addTo(m).bindPopup(r.label);
+    L.polyline(r.pts,{color:r.c,weight:4,opacity:.85,dashArray:r.c==='#2e6fd8'&&cfg.city==='城际'?'10 8':null})
+     .addTo(m).bindPopup('<b>'+r.label+'</b>');
   });
+  // 点位(序号 + tooltip + popup日期徽章)
   cfg.pts.forEach(p=>{
-    L.circleMarker([p[1],p[2]],{radius:8,color:'#fff',weight:2.5,fillColor:colorMap[p[3]]||'#333',fillOpacity:.95})
-     .addTo(m).bindPopup('<b>'+p[0]+'</b><br>'+p[4]);
+    const [name,lat,lng,type,desc,day,order]=p;
+    const icon=L.divIcon({className:'',iconSize:[26,26],iconAnchor:[13,13],
+      html:'<div class="pin '+type+'">'+(order>0?order:'')+'</div>'});
+    const mk=L.marker([lat,lng],{icon}).addTo(m);
+    const dayTag=day?('<span class="day-tag">'+day+'</span>'):'';
+    mk.bindPopup('<b>'+dayTag+name+'</b><br>'+desc);
+    mk.bindTooltip((order>0?order+'. ':'')+name,{direction:'top',offset:[0,-14]});
   });
+  // 局部图例(该城日期→颜色)
+  const leg=L.control({position:'topright'});
+  leg.onAdd=()=>{const d=L.DomUtil.create('div','map-leg');
+    d.innerHTML='<div class="ml-t">'+cfg.city+' 路线</div>'
+      +cfg.routes.map(r=>'<div class="ml-i"><span class="sw" style="background:'+r.c+'"></span>'+r.label+'</div>').join('');
+    return d;};
+  leg.addTo(m);
   return m;
 }
 ['japan','tokyo','kamakura','osaka','kyoto'].forEach(k=>render('map-'+k,DATA[k]));
