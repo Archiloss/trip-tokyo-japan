@@ -19,8 +19,7 @@ body{font-family:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei
 .wrap{max-width:1120px;margin:0 auto;padding:20px}
 .legend{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;font-size:12.5px;color:#5a6474;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 15px;margin-bottom:18px}
 .legend span{display:flex;align-items:center;gap:6px}
-.dot{width:11px;height:11px;border-radius:50%;display:inline-block}
-.dot.amber{background:#c9872d}.dot.green{background:#3a9d63}.dot.blue{background:#2e6fd8}.dot.purple{background:#8e6bd8}
+.lic{font-size:14px;width:20px;text-align:center;flex:none}
 .seq{display:inline-block;width:16px;height:16px;border-radius:50%;background:#5a6474;color:#fff;font-size:10px;font-weight:700;text-align:center;line-height:16px}
 section.city{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:22px;overflow:hidden}
 .city-h{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--line)}
@@ -36,9 +35,10 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
 .day ul li{list-style:disc}
 .map{padding:12px;position:relative}
 #map-japan,#map-tokyo,#map-kamakura,#map-osaka,#map-kyoto{height:470px;border-radius:12px;border:1px solid var(--line)}
-.pin{width:26px;height:26px;border-radius:50%;border:2px solid #fff;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.35)}
-.pin.amber{background:#c9872d}.pin.green{background:#3a9d63}.pin.blue{background:#2e6fd8}.pin.purple{background:#8e6bd8}.pin.hotel{background:#6b4a2f}.pin.opt{background:#a9b1bf;opacity:.62}
-.map-leg{background:rgba(255,255,255,.95);border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-size:12px;color:#3a4356;max-width:212px;line-height:1.7;cursor:pointer;overflow:hidden}
+.pin{width:30px;height:30px;border-radius:50%;background:#fff;border:2.5px solid var(--pc);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.3);position:relative;font-size:14px}
+.pin.amber{--pc:#c9872d}.pin.green{--pc:#3a9d63}.pin.blue{--pc:#2e6fd8}.pin.purple{--pc:#8e6bd8}.pin.hotel{--pc:#6b4a2f}.pin.airport{--pc:#2e6fd8}.pin.opt{--pc:#a9b1bf;opacity:.78}
+.pin .num{position:absolute;top:-6px;right:-6px;background:var(--navy);color:#fff;font-size:9.5px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff}
+.map-leg{background:rgba(255,255,255,.95);border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-size:12px;color:#3a4356;max-width:218px;line-height:1.7;cursor:pointer;overflow:hidden}
 .map-leg .ml-hd{font-weight:700;color:var(--navy);padding:7px 10px;display:flex;align-items:center;gap:6px;white-space:nowrap;user-select:none}
 .map-leg .ml-body{display:none;padding:0 10px 9px;cursor:default}
 .map-leg.open .ml-body{display:block}
@@ -46,7 +46,6 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
 .sw{width:20px;height:4px;border-radius:2px;display:inline-block;flex:none}
 .ml-h{font-weight:700;color:#5a6474;margin-top:7px;font-size:11.5px}
 .map-leg .ml-h:first-of-type{margin-top:4px}
-.dsq{width:11px;height:11px;border-radius:50%;display:inline-block;flex:none}
 .day-tag{background:#e9f0fb;color:#2e6fd8;font-size:11px;padding:0 6px;border-radius:999px;margin-right:4px}
 .leaflet-tooltip{font-size:12px!important}
 .foot{text-align:center;font-size:12px;color:#9aa3b2;padding:6px 0 24px}
@@ -65,7 +64,9 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
 <script>
 const TILE='https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const ATTR='&copy; OpenStreetMap';
-const TYPE_COLOR={amber:'#c9872d',green:'#3a9d63',blue:'#2e6fd8',purple:'#8e6bd8',hotel:'#6b4a2f',opt:'#a9b1bf'};
+const ICON={amber:'👜',green:'⛩️',blue:'🚉',purple:'🛍️',hotel:'🏨',airport:'✈️',opt:'◌'};
+const TYPE_COLOR={amber:'#c9872d',green:'#3a9d63',blue:'#2e6fd8',purple:'#8e6bd8',hotel:'#6b4a2f',airport:'#2e6fd8',opt:'#a9b1bf'};
+const TYPE_NAME={amber:'二奢/买手店',green:'景点/古迹',blue:'车站/交通',purple:'商圈/观景',hotel:'酒店/机场',airport:'机场',opt:'备选(可选)'};
 const app=document.getElementById('app');
 
 function renderCity(cfg){
@@ -91,30 +92,27 @@ function weekday(s){const [mo,da]=s.split('/').map(Number);const d=new Date(2026
 function renderMap(id,cfg){
   const m=L.map('map-'+id,{scrollWheelZoom:true}).setView(cfg.center,cfg.zoom);
   L.tileLayer(TILE,{attribution:ATTR}).addTo(m);
-  // 路线:色=route.color, 图例也=route.color(同源)
   cfg.routes.forEach(r=>{
     L.polyline(r.pts,{color:r.color,weight:4,opacity:.85,dashArray:r.dashed?'10 8':null})
      .addTo(m).bindPopup('<b>'+r.label+'</b>');
   });
   cfg.pois.forEach(p=>{
-    const icon=L.divIcon({className:'',iconSize:[26,26],iconAnchor:[13,13],
-      html:'<div class="pin '+p.type+'">'+(p.order>0?p.order:'')+'</div>'});
+    const icon=L.divIcon({className:'',iconSize:[30,30],iconAnchor:[15,15],
+      html:'<div class="pin '+p.type+'"><span class="ic">'+(ICON[p.type]||'📍')+'</span>'+(p.order>0?'<span class="num">'+p.order+'</span>':'')+'</div>'});
     const mk=L.marker(p.coord,{icon}).addTo(m);
     const dayTag=p.day?('<span class="day-tag">'+p.day+'</span>'):'';
-    mk.bindPopup('<b>'+dayTag+p.name+'</b><br>'+p.desc);
-    mk.bindTooltip((p.order>0?p.order+'. ':'')+p.name,{direction:'top',offset:[0,-14]});
+    mk.bindPopup('<b>'+dayTag+(ICON[p.type]||'')+' '+p.name+'</b><br>'+p.desc);
+    mk.bindTooltip((p.order>0?p.order+'. ':'')+p.name,{direction:'top',offset:[0,-16]});
   });
-  // 局部图例:路线(线色)+点位(点色),对图上出现的一切颜色闭合
   if(cfg.routes.length || cfg.pois.length){
     const leg=L.control({position:'topright'});
     leg.onAdd=()=>{const d=L.DomUtil.create('div','map-leg');
-      const tm={amber:'二奢/买手店',green:'景点/古迹',blue:'车站/交通',purple:'商圈/观景',hotel:'酒店/机场',opt:'备选(可选)'};
-      const used=[...new Set(cfg.pois.map(p=>p.type))].filter(t=>tm[t]);
+      const used=[...new Set(cfg.pois.map(p=>p.type))].filter(t=>TYPE_NAME[t]);
       d.innerHTML='<div class="ml-hd">🧭 '+cfg.city+' 图例 ▾</div><div class="ml-body">'
         +'<div class="ml-h">路线</div>'
         +cfg.routes.map(r=>'<div class="ml-i"><span class="sw" style="background:'+r.color+'"></span>'+r.label+'</div>').join('')
         +'<div class="ml-h">点位</div>'
-        +used.map(t=>'<div class="ml-i"><span class="dsq" style="background:'+TYPE_COLOR[t]+'"></span>'+tm[t]+'</div>').join('')
+        +used.map(t=>'<div class="ml-i"><span class="lic">'+(ICON[t]||'•')+'</span>'+TYPE_NAME[t]+'</div>').join('')
         +'</div>';
       d.querySelector('.ml-hd').onclick=()=>{const o=d.classList.toggle('open');d.querySelector('.ml-hd').textContent='🧭 '+cfg.city+' 图例 '+(o?'▴':'▾');};
       return d;};
@@ -130,12 +128,13 @@ fetch('data.json?v='+Date.now()).then(r=>r.json()).then(data=>{
       `<div class="flight"><span class="tag" style="background:${f.color}">${f.tag}</span><br><b>${f.date}</b><div>${f.desc}</div></div>`).join('')}
     </div></div>`;
   const legend=`<div class="wrap"><div class="legend">
-    <span><span class="dot amber"></span>二奢/买手店</span>
-    <span><span class="dot green"></span>景点/公园</span>
-    <span><span class="dot blue"></span>车站/交通</span>
-    <span><span class="dot purple"></span>商圈/市区</span>
+    <span><span class="lic">👜</span>二奢/买手店</span>
+    <span><span class="lic">⛩️</span>景点/古迹</span>
+    <span><span class="lic">🚉</span>车站/交通</span>
+    <span><span class="lic">🛍️</span>商圈/观景</span>
+    <span><span class="lic">🏨</span>酒店/机场</span>
     <span><span class="seq">1</span>数字=当天走访顺序</span>
-    <span>色点/色条=当天路线(见各图右上角)</span>
+    <span>虚线/色条=当天路线(见各图右上角)</span>
   </div>`;
   const sections=data.cities.map(c=>renderCity(c)).join('');
   const foot=`<div class="foot">二奢店位置为街区示意,以实际门店为准 · 数字=当天先后顺序 · 数据源 data.json · 地图 © OpenStreetMap · Leaflet</div></div>`;
