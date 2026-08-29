@@ -86,7 +86,7 @@ function renderCity(cfg){
   const tmp=document.createElement('div');tmp.innerHTML=html;
   return tmp.firstElementChild.outerHTML;
 }
-function weekday(s){const m={9:'01',10:'02'};const d=new Date('2026-'+m[Number(s.slice(0,2))]+'-'+s.slice(3,5));return '日一二三四五六'[d.getDay()];}
+function weekday(s){const [mo,da]=s.split('/').map(Number);const d=new Date(2026,mo-1,da);return '日一二三四五六'[d.getDay()];}
 
 function renderMap(id,cfg){
   const m=L.map('map-'+id,{scrollWheelZoom:true}).setView(cfg.center,cfg.zoom);
