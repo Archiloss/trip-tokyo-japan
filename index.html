@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>国庆日本行 · 东进西出</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
@@ -93,7 +96,9 @@ function renderMap(id,cfg){
   const m=L.map('map-'+id,{scrollWheelZoom:true}).setView(cfg.center,cfg.zoom);
   L.tileLayer(TILE,{attribution:ATTR}).addTo(m);
   cfg.routes.forEach(r=>{
-    L.polyline(r.pts,{color:r.color,weight:4,opacity:.85,dashArray:r.dashed?'10 8':null})
+    const hotel=cfg.pois.find(p=>p.type==='hotel');
+    const pts=r.pts.map(pt=>((pt==='@hotel'&&hotel)?hotel.coord:pt));
+    L.polyline(pts,{color:r.color,weight:4,opacity:.85,dashArray:r.dashed?'10 8':null})
      .addTo(m).bindPopup('<b>'+r.label+'</b>');
   });
   cfg.pois.forEach(p=>{
@@ -134,10 +139,10 @@ fetch('data.json?v='+Date.now()).then(r=>r.json()).then(data=>{
     <span><span class="lic">🛍️</span>商圈/观景</span>
     <span><span class="lic">🏨</span>酒店/机场</span>
     <span><span class="seq">1</span>数字=当天走访顺序</span>
-    <span>虚线/色条=当天路线(见各图右上角)</span>
+    <span>图标=点位类型 · 色条=当天路线(见各图右上角)</span>
   </div>`;
   const sections=data.cities.map(c=>renderCity(c)).join('');
-  const foot=`<div class="foot">二奢店位置为街区示意,以实际门店为准 · 数字=当天先后顺序 · 数据源 data.json · 地图 © OpenStreetMap · Leaflet</div></div>`;
+  const foot=`<div class="foot">酒店/二奢店坐标为街区示意(酒店锚点待定,定了我更新) · 数字=当天先后顺序 · 数据源 data.json · 地图 © OpenStreetMap · Leaflet</div></div>`;
   app.innerHTML=hero+legend+sections+foot;
   data.cities.forEach(c=>renderMap(c.id,c));
 }).catch(e=>{app.innerHTML='<div class="loading">加载失败: '+e.message+'<br>请用 http(s) 打开(直接双击 file:// 会被浏览器拦截)。</div>';});
