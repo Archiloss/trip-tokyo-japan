@@ -38,9 +38,11 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
 #map-japan,#map-tokyo,#map-kamakura,#map-osaka,#map-kyoto{height:470px;border-radius:12px;border:1px solid var(--line)}
 .pin{width:26px;height:26px;border-radius:50%;border:2px solid #fff;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.35)}
 .pin.amber{background:#c9872d}.pin.green{background:#3a9d63}.pin.blue{background:#2e6fd8}.pin.purple{background:#8e6bd8}
-.map-leg{background:rgba(255,255,255,.95);border-radius:10px;padding:9px 11px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-size:12px;color:#3a4356;max-width:195px;line-height:1.7}
-.map-leg .ml-t{font-weight:700;color:var(--navy);border-bottom:1px solid var(--line);padding-bottom:4px;margin-bottom:5px}
-.map-leg .ml-i{display:flex;align-items:center;gap:6px}
+.map-leg{background:rgba(255,255,255,.95);border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-size:12px;color:#3a4356;max-width:212px;line-height:1.7;cursor:pointer;overflow:hidden}
+.map-leg .ml-hd{font-weight:700;color:var(--navy);padding:7px 10px;display:flex;align-items:center;gap:6px;white-space:nowrap;user-select:none}
+.map-leg .ml-body{display:none;padding:0 10px 9px;cursor:default}
+.map-leg.open .ml-body{display:block}
+.map-leg .ml-i{display:flex;align-items:center;gap:6px;margin-top:2px}
 .sw{width:20px;height:4px;border-radius:2px;display:inline-block;flex:none}
 .ml-h{font-weight:700;color:#5a6474;margin-top:7px;font-size:11.5px}
 .map-leg .ml-h:first-of-type{margin-top:4px}
@@ -108,11 +110,13 @@ function renderMap(id,cfg){
     leg.onAdd=()=>{const d=L.DomUtil.create('div','map-leg');
       const tm={amber:'二奢/买手店',green:'景点/古迹',blue:'车站/交通',purple:'商圈/观景'};
       const used=[...new Set(cfg.pois.map(p=>p.type))].filter(t=>tm[t]);
-      d.innerHTML='<div class="ml-t">'+cfg.city+' 图例</div>'
+      d.innerHTML='<div class="ml-hd">🧭 '+cfg.city+' 图例 ▾</div><div class="ml-body">'
         +'<div class="ml-h">路线</div>'
         +cfg.routes.map(r=>'<div class="ml-i"><span class="sw" style="background:'+r.color+'"></span>'+r.label+'</div>').join('')
         +'<div class="ml-h">点位</div>'
-        +used.map(t=>'<div class="ml-i"><span class="dsq" style="background:'+TYPE_COLOR[t]+'"></span>'+tm[t]+'</div>').join('');
+        +used.map(t=>'<div class="ml-i"><span class="dsq" style="background:'+TYPE_COLOR[t]+'"></span>'+tm[t]+'</div>').join('')
+        +'</div>';
+      d.querySelector('.ml-hd').onclick=()=>{const o=d.classList.toggle('open');d.querySelector('.ml-hd').textContent='🧭 '+cfg.city+' 图例 '+(o?'▴':'▾');};
       return d;};
     leg.addTo(m);
   }
