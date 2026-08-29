@@ -123,7 +123,7 @@ function renderMap(id,cfg){
   return m;
 }
 
-fetch('data.json').then(r=>r.json()).then(data=>{
+fetch('data.json?v='+Date.now()).then(r=>r.json()).then(data=>{
   const mf=data.meta;
   let hero=`<div class="hero"><h1>✈️ ${mf.title}</h1><div class="sub">${mf.subtitle}</div>
     <div class="flights">${mf.flights.map(f=>
