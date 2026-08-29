@@ -12,14 +12,15 @@
       "id": "japan", "city": "城际", "title": "🗾 城际概览", "badge": "东京 → 大阪 新干线约2.5-3h",
       "center": [35.4, 138.2], "zoom": 6, "days": [],
       "routes": [
-        {"color": "#2e6fd8", "label": "新干线 东京→大阪 约2.5-3h", "dashed": true,
-         "pts": [[35.6812, 139.7671], [34.7334, 135.5002]]}
+        {"color": "#2e6fd8", "label": "新干线 东京→大阪", "dashed": true, "pts": [[35.6812, 139.7671], [34.7334, 135.5002]]},
+        {"color": "#3a9d63", "label": "东京→镰仓 当天往返", "dashed": true, "pts": [[35.6812, 139.7671], [35.3192, 139.5467]]},
+        {"color": "#c9872d", "label": "大阪→京都 往返", "dashed": true, "pts": [[34.6937, 135.5023], [35.0116, 135.7681]]}
       ],
       "pois": [
         {"name": "东京", "coord": [35.6812, 139.7671], "type": "blue", "day": "9/26-9/30", "order": 1, "desc": "9/26-9/30 二奢citywalk"},
-        {"name": "镰仓", "coord": [35.3192, 139.5467], "type": "green", "day": "9/29", "order": 2, "desc": "9/29 镰仓"},
+        {"name": "镰仓", "coord": [35.3192, 139.5467], "type": "green", "day": "9/29", "order": 2, "desc": "9/29 镰仓(从东京往返)"},
         {"name": "大阪", "coord": [34.6937, 135.5023], "type": "blue", "day": "9/30-10/4", "order": 3, "desc": "9/30-10/4 关西"},
-        {"name": "京都", "coord": [35.0116, 135.7681], "type": "green", "day": "10/2-10/3", "order": 4, "desc": "10/2-10/3 京都"}
+        {"name": "京都", "coord": [35.0116, 135.7681], "type": "green", "day": "10/2-10/3", "order": 4, "desc": "10/2-10/3 京都(从大阪往返)"}
       ]
     },
     {
@@ -49,10 +50,10 @@
         {"name": "表参道 · KOMEHYO VINTAGE", "coord": [35.6647, 139.7097], "type": "amber", "day": "9/28", "order": 1, "desc": "atelier · Hermès Lindy + Chrome Hearts"},
         {"name": "MixTHINKS", "coord": [35.6640, 139.7085], "type": "amber", "day": "9/28", "order": 2, "desc": "两层 LV 朝圣地"},
         {"name": "原宿 · RAGTAG/Chicago", "coord": [35.6699, 139.7018], "type": "amber", "day": "9/28", "order": 3, "desc": "二手潮牌联名"},
-        {"name": "六本木(艺术·晚)", "coord": [35.6645, 139.7300], "type": "purple", "day": "9/28", "order": 0, "desc": "国立新美术馆/21_21 · 晚间可选"},
+        {"name": "六本木(艺术·晚|备选)", "coord": [35.6645, 139.7300], "type": "opt", "day": "9/28", "order": 0, "desc": "国立新美术馆/21_21 · 晚间可选"},
         {"name": "银座 · KOMEHYO本店", "coord": [35.6728, 139.7639], "type": "amber", "day": "9/30", "order": 1, "desc": "最大连锁 · 劳力士→LV"},
         {"name": "银座 · 大黑屋", "coord": [35.6717, 139.7645], "type": "amber", "day": "9/30", "order": 2, "desc": "中古连锁"},
-        {"name": "下北泽(备选)", "coord": [35.6617, 139.6664], "type": "amber", "day": "9/30", "order": 0, "desc": "极致性价比 · Chicago/2nd Street"},
+        {"name": "下北泽(备选)", "coord": [35.6617, 139.6664], "type": "opt", "day": "9/30", "order": 0, "desc": "极致性价比 · Chicago/2nd Street"},
         {"name": "东京站(新干线)", "coord": [35.6812, 139.7671], "type": "blue", "day": "9/30", "order": 3, "desc": "→ 大阪"}
       ]
     },
@@ -77,8 +78,8 @@
       "days": [
         {"date": "9/30", "color": "#d64541", "label": "9/30 新大阪→酒店→道顿堀", "title": "新干线 → 大阪", "itinerary": ["新大阪 → 酒店放行李", "① 道顿堀 · ② 心斋桥 晚餐"]},
         {"date": "10/1", "color": "#2e6fd8", "label": "10/1 酒店→大阪城→梅田→酒店", "title": "大阪城 · 市井", "itinerary": ["① 大阪城公园 → ② 黑门市场", "③ 通天阁 · 新世界 → ④ 梅田夜景", "回酒店"]},
-        {"date": "10/2", "color": "#c9872d", "label": "10/2 京都①", "title": "京都①", "itinerary": ["① 伏见稻荷 → ② 清水寺 · 二年坂", "③ 祇园 · 花见小路"]},
-        {"date": "10/3", "color": "#3a9d63", "label": "10/3 京都②", "title": "京都②", "itinerary": ["① 岚山 竹林 · 渡月桥 → ② 金阁寺"]},
+        {"date": "10/2", "color": "#c9872d", "label": "10/2 京都①", "title": "京都①", "itinerary": ["① 伏见稻荷 → ② 清水寺 · 二年坂", "③ 祇园 · 花见小路", "回大阪酒店"]},
+        {"date": "10/3", "color": "#3a9d63", "label": "10/3 京都②", "title": "京都②", "itinerary": ["① 岚山 竹林 · 渡月桥 → ② 金阁寺", "回大阪酒店"]},
         {"date": "10/4", "color": "#8e6bd8", "label": "10/4 酒店→心斋桥→酒店", "title": "大阪收尾", "itinerary": ["心斋桥购物 · 难波", "晚上住大阪/临空城(近机场)"]}
       ],
       "routes": [
