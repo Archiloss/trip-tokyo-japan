@@ -7,7 +7,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>国庆日本行 · 东进西出</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
 :root{--navy:#1b2a4a;--blue:#2e6fd8;--amber:#c9872d;--green:#3a9d63;--bg:#f6f8fb;--card:#fff;--line:#e6ebf2}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -63,9 +63,15 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
 </head>
 <body>
 <div id="app"><div class="loading">加载行程数据…</div></div>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const TILE='https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+// 瓦片多源自动 fallback：Bing路网(带地名,WGS84无偏移,国内可达) → Carto(全球CDN) → OSM
+// 检测到某源连续加载失败(网络不通/超时)即自动切下一个源，保证地图能出图。
+const TILE_SOURCES=[
+  {url:'https://ecn.t{s}.tiles.virtualearth.net/tiles/r{q}.jpeg?g=1', sub:['0','1','2','3','4','5','6','7'], attr:'&copy; Microsoft', max:19},
+  {url:'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', sub:'abcd', attr:'&copy; OpenStreetMap &copy; CARTO', max:19},
+  {url:'https://tile.openstreetmap.org/{z}/{x}/{y}.png', sub:[], attr:'&copy; OpenStreetMap', max:19}
+];
 const ATTR='&copy; OpenStreetMap';
 const ICON={amber:'👜',green:'⛩️',blue:'🚉',purple:'🛍️',hotel:'🏨',airport:'✈️',opt:'◌'};
 const TYPE_COLOR={amber:'#c9872d',green:'#3a9d63',blue:'#2e6fd8',purple:'#8e6bd8',hotel:'#6b4a2f',airport:'#2e6fd8',opt:'#a9b1bf'};
@@ -92,9 +98,36 @@ function renderCity(cfg){
 }
 function weekday(s){const [mo,da]=s.split('/').map(Number);const d=new Date(2026,mo-1,da);return '日一二三四五六'[d.getDay()];}
 
+function makeTileLayer(s){
+  if((s.url||'').indexOf('{q}')>=0){ // Bing quadkey 瓦片，需自定义 getTileUrl
+    const layer=L.tileLayer('',{subdomains:s.sub,maxZoom:s.max,attribution:s.attr});
+    layer.getTileUrl=function(coords){
+      const z=coords.z,x=coords.x,y=coords.y;
+      let qk='';for(let i=z;i>0;i--){let d=0;const m=1<<(i-1);if(x&m)d+=1;if(y&m)d+=2;qk+=d;}
+      const sub=this.options.subdomains[(x+y)%this.options.subdomains.length];
+      return s.url.replace('{q}',qk).replace('{s}',sub);
+    };
+    return layer;
+  }
+  return L.tileLayer(s.url,{subdomains:s.sub,maxZoom:s.max,attribution:s.attr});
+}
+function addTiles(map){
+  let idx=0;
+  function load(){
+    const s=TILE_SOURCES[idx];
+    const layer=makeTileLayer(s);
+    layer.addTo(map);
+    let errs=0;
+    layer.on('tileerror',()=>{
+      errs++;
+      if(errs>=4 && idx<TILE_SOURCES.length-1){ map.removeLayer(layer); idx++; load(); }
+    });
+  }
+  load();
+}
 function renderMap(id,cfg){
   const m=L.map('map-'+id,{scrollWheelZoom:true}).setView(cfg.center,cfg.zoom);
-  L.tileLayer(TILE,{attribution:ATTR}).addTo(m);
+  addTiles(m);
   cfg.routes.forEach(r=>{
     const hotel=cfg.pois.find(p=>p.type==='hotel');
     const pts=r.pts.map(pt=>((pt==='@hotel'&&hotel)?hotel.coord:pt));
