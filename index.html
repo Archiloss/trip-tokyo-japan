@@ -51,6 +51,7 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
 .map-leg .ml-h:first-of-type{margin-top:4px}
 .day-tag{background:#e9f0fb;color:#2e6fd8;font-size:11px;padding:0 6px;border-radius:999px;margin-right:4px}
 .leaflet-tooltip{font-size:12px!important}
+.plabel{position:absolute;top:-20px;left:50%;transform:translateX(-50%);white-space:nowrap;background:rgba(255,255,255,.94);border:1px solid #d3d9e2;border-radius:5px;padding:0 5px;font-size:10.5px;color:#2b3240;box-shadow:0 1px 3px rgba(0,0,0,.18);line-height:1.5;z-index:50;max-width:150px;overflow:hidden;text-overflow:ellipsis}
 .foot{text-align:center;font-size:12px;color:#9aa3b2;padding:6px 0 24px}
 .loading{text-align:center;padding:40px;color:#9aa3b2}
 @media(max-width:820px){
@@ -136,8 +137,9 @@ function renderMap(id,cfg){
      .addTo(m).bindPopup('<b>'+r.label+'</b>');
   });
   cfg.pois.forEach(p=>{
+    const label=p.name.length>9?p.name.slice(0,9)+'…':p.name;
     const icon=L.divIcon({className:'',iconSize:[30,30],iconAnchor:[15,15],
-      html:'<div class="pin '+p.type+'"><span class="ic">'+(ICON[p.type]||'📍')+'</span>'+(p.order>0?'<span class="num">'+p.order+'</span>':'')+'</div>'});
+      html:'<div class="pwrap"><div class="pin '+p.type+'"><span class="ic">'+(ICON[p.type]||'📍')+'</span>'+(p.order>0?'<span class="num">'+p.order+'</span>':'')+'</div><div class="plabel">'+label+'</div></div>'});
     const mk=L.marker(p.coord,{icon}).addTo(m);
     const dayTag=p.day?('<span class="day-tag">'+p.day+'</span>'):'';
     mk.bindPopup('<b>'+dayTag+(ICON[p.type]||'')+' '+p.name+'</b><br>'+p.desc);
