@@ -65,11 +65,11 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
 <div id="app"><div class="loading">加载行程数据…</div></div>
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-// 瓦片多源自动 fallback：Bing路网(带地名) → 高德卫星(国内必达) → Carto → OSM
-// 检测到某源连续加载失败(网络不通/超时)即自动切下一个源，保证地图能出图。
+// 瓦片多源自动 fallback：高德卫星(国内必达,无签名校验,真实航拍) → Bing路网(带地名) → Carto → OSM
+// 国内厂商路网瓦片已全被签名锁死,唯一稳定裸源是卫星;地名为中文点位标注覆盖。
 const TILE_SOURCES=[
-  {url:'https://ecn.t{s}.tiles.virtualearth.net/tiles/r{q}.jpeg?g=1', sub:['0','1','2','3','4','5','6','7'], attr:'&copy; Microsoft', max:19},
   {url:'https://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}', sub:['1','2','3','4'], attr:'&copy; 高德地图(卫星)', max:18},
+  {url:'https://ecn.t{s}.tiles.virtualearth.net/tiles/r{q}.jpeg?g=1', sub:['0','1','2','3','4','5','6','7'], attr:'&copy; Microsoft', max:19},
   {url:'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', sub:'abcd', attr:'&copy; OpenStreetMap &copy; CARTO', max:19},
   {url:'https://tile.openstreetmap.org/{z}/{x}/{y}.png', sub:[], attr:'&copy; OpenStreetMap', max:19}
 ];
