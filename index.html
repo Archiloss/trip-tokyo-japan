@@ -203,8 +203,15 @@ fetch('data.json?v='+Date.now()).then(r=>r.json()).then(data=>{
     <div>· <b>行李</b>:9/27 镰仓大件留酒店;9/29 若改去镰仓→行李寄存镰仓站→傍晚箱根</div>
     <div>· <b>二奢</b>:代官山/中目黑/表参道/银座;银座适合连锁比价</div>
   </div></div>`;
+  const eats=`<div class="wrap"><div class="tips"><div class="ov-h">🍱 必吃清单</div>
+    <div>· <b>东京</b>:筑地场外海鲜 · 银座和牛寿司 · 一兰拉面 · 代官山咖啡</div>
+    <div>· <b>镰仓</b>:小町通抹茶甜筒 · 江之岛海鲜丼</div>
+    <div>· <b>箱根</b>:温泉旅馆怀石 · 大涌谷黑玉子</div>
+    <div>· <b>京都</b>:宇治抹茶(中村藤吉) · 锦市场小吃 · 汤豆腐怀石 · 和果子</div>
+    <div>· <b>大阪</b>:黑门市场(海鲜·河豚) · 道顿堀章鱼烧·大阪烧 · 神户牛(神户备选)</div>
+  </div></div>`;
   const foot=`<div class="foot">酒店/二奢店坐标为街区示意(酒店锚点待定,定了我更新) · 数字=当天先后顺序 · 数据源 data.json · 地图 © OpenStreetMap · Leaflet</div></div>`;
-  app.innerHTML=hero+overview+legend+tips+sections+foot;
+  app.innerHTML=hero+overview+legend+tips+eats+sections+foot;
   data.cities.forEach(c=>renderMap(c.id,c));
 }).catch(e=>{app.innerHTML='<div class="loading">加载失败: '+e.message+'<br>请用 http(s) 打开(直接双击 file:// 会被浏览器拦截)。</div>';});
 </script>
