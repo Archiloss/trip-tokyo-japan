@@ -54,6 +54,13 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
 .plabel{position:absolute;top:-20px;left:50%;transform:translateX(-50%);white-space:nowrap;background:rgba(255,255,255,.94);border:1px solid #d3d9e2;border-radius:5px;padding:0 5px;font-size:10.5px;color:#2b3240;box-shadow:0 1px 3px rgba(0,0,0,.18);line-height:1.5;z-index:50;max-width:150px;overflow:hidden;text-overflow:ellipsis}
 .foot{text-align:center;font-size:12px;color:#9aa3b2;padding:6px 0 24px}
 .loading{text-align:center;padding:40px;color:#9aa3b2}
+.ov{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:14px}
+.ov-h{font-weight:700;color:var(--navy);font-size:13px;margin-bottom:8px}
+.ov-grid{display:flex;flex-wrap:wrap;gap:6px}
+.ov-day{background:#f0f4fb;border-radius:8px;padding:4px 9px;font-size:12px;color:#3a4356}
+.ov-day b{color:#2e6fd8;margin-right:4px}
+.tips{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:14px;font-size:13px;color:#4a5364}
+.tips div{margin-top:4px}
 @media(max-width:820px){
   .body{grid-template-columns:1fr}
   .days{border-right:none;border-bottom:1px solid var(--line)}
@@ -177,8 +184,27 @@ fetch('data.json?v='+Date.now()).then(r=>r.json()).then(data=>{
     <span>图标=点位类型 · 色条=当天路线(见各图右上角)</span>
   </div>`;
   const sections=data.cities.map(c=>renderCity(c)).join('');
+  const overview=`<div class="wrap"><div class="ov"><div class="ov-h">📅 行程速览</div><div class="ov-grid">
+    <div class="ov-day"><b>9/26</b>东京·六本木</div>
+    <div class="ov-day"><b>9/27</b>镰仓(视天气)</div>
+    <div class="ov-day"><b>9/28</b>东京·二奢</div>
+    <div class="ov-day"><b>9/29</b>东京→箱根</div>
+    <div class="ov-day"><b>9/30</b>箱根→京都</div>
+    <div class="ov-day"><b>10/1</b>京都</div>
+    <div class="ov-day"><b>10/2</b>京都</div>
+    <div class="ov-day"><b>10/3</b>京都→大阪</div>
+    <div class="ov-day"><b>10/4</b>大阪</div>
+    <div class="ov-day"><b>10/5</b>关西机场回</div>
+  </div></div></div>`;
+  const tips=`<div class="wrap"><div class="tips"><div class="ov-h">🧭 实用小贴士</div>
+    <div>· <b>交通</b>:新宿→箱根 小田急浪漫特快≈1.5h;箱根→小田原→京都 新干线≈2.5h;京都→大阪 新干线≈15min</div>
+    <div>· <b>支付</b>:备现金+交通卡(Suica/ICOCA);部分支持支付宝/微信</div>
+    <div>· <b>泡汤</b>:箱根汤本温泉旅馆,备好浴衣</div>
+    <div>· <b>行李</b>:9/27 镰仓大件留酒店;9/29 若改去镰仓→行李寄存镰仓站→傍晚箱根</div>
+    <div>· <b>二奢</b>:代官山/中目黑/表参道/银座;银座适合连锁比价</div>
+  </div></div>`;
   const foot=`<div class="foot">酒店/二奢店坐标为街区示意(酒店锚点待定,定了我更新) · 数字=当天先后顺序 · 数据源 data.json · 地图 © OpenStreetMap · Leaflet</div></div>`;
-  app.innerHTML=hero+legend+sections+foot;
+  app.innerHTML=hero+overview+legend+tips+sections+foot;
   data.cities.forEach(c=>renderMap(c.id,c));
 }).catch(e=>{app.innerHTML='<div class="loading">加载失败: '+e.message+'<br>请用 http(s) 打开(直接双击 file:// 会被浏览器拦截)。</div>';});
 </script>
