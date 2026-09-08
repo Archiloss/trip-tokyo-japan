@@ -203,8 +203,8 @@ fetch('data.json?v='+Date.now()).then(r=>r.json()).then(data=>{
     <span><span class="lic">🏨</span>酒店/机场</span>
     <span><span class="seq">1</span>数字=当天走访顺序</span>
     <span>图标=点位类型 · 色条=当天路线(见各图右上角)</span>
-  </div>`;
-  const sections=data.cities.map(c=>renderCity(c)).join('');
+  </div></div>`;
+  const sections=data.cities.map(c=>'<div class="wrap">'+renderCity(c)+'</div>').join('');
   const overview=`<div class="wrap"><div class="ov"><div class="ov-h">📅 行程速览</div><div class="ov-grid">
     <div class="ov-day"><b>9/26</b>东京·六本木</div>
     <div class="ov-day"><b>9/27</b>镰仓(视天气)</div>
@@ -231,7 +231,7 @@ fetch('data.json?v='+Date.now()).then(r=>r.json()).then(data=>{
     <div>· <b>京都</b>:宇治抹茶(中村藤吉) · 锦市场小吃 · 汤豆腐怀石 · 和果子</div>
     <div>· <b>大阪</b>:黑门市场(海鲜·河豚) · 道顿堀章鱼烧·大阪烧 · 神户牛(神户备选)</div>
   </div></div>`;
-  const foot=`<div class="foot">酒店/二奢店坐标为街区示意(酒店锚点待定,定了我更新) · 数字=当天先后顺序 · 数据源 data.json · 地图 © OpenStreetMap · Leaflet</div></div>`;
+  const foot=`<div class="wrap"><div class="foot">酒店/二奢店坐标为街区示意(酒店锚点待定,定了我更新) · 数字=当天先后顺序 · 数据源 data.json · 地图 © OpenStreetMap · Leaflet</div></div>`;
   app.innerHTML=hero+overview+legend+tips+eats+sections+foot;
   data.cities.forEach(c=>renderMap(c.id,c));
 }).catch(e=>{app.innerHTML='<div class="loading">加载失败: '+e.message+'<br>请用 http(s) 打开(直接双击 file:// 会被浏览器拦截)。</div>';});
