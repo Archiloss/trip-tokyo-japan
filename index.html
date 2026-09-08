@@ -12,31 +12,31 @@
 :root{--navy:#1b2a4a;--blue:#2e6fd8;--amber:#c9872d;--green:#3a9d63;--bg:#f6f8fb;--card:#fff;--line:#e6ebf2}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:#2b3240;line-height:1.6}
-.hero{background:linear-gradient(135deg,#1b2a4a,#24406b 55%,#2e6fd8);color:#fff;padding:34px 22px 26px;text-align:center}
-.hero h1{font-size:27px;letter-spacing:1px;margin-bottom:8px;word-break:break-all;overflow-wrap:anywhere}
-.hero .sub{font-size:14px;opacity:.9;margin-bottom:18px;word-break:break-all;overflow-wrap:anywhere}
-.flights{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.flight{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:11px 16px;font-size:13px;text-align:left;min-width:235px}
+.hero{background:linear-gradient(135deg,#1b2a4a,#24406b 55%,#2e6fd8);color:#fff;padding:24px 20px 18px;text-align:center}
+.hero h1{font-size:27px;letter-spacing:1px;margin-bottom:6px;word-break:break-all;overflow-wrap:anywhere}
+.hero .sub{font-size:14px;opacity:.9;margin-bottom:14px;word-break:break-all;overflow-wrap:anywhere}
+.flights{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.flight{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:9px 14px;font-size:13px;text-align:left;min-width:235px}
 .flight .tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:999px;margin-bottom:6px}
 .flight b{font-size:15px}.flight div{opacity:.92;margin-top:3px}
-.wrap{max-width:1120px;margin:0 auto;padding:20px}
-.legend{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;font-size:12.5px;color:#5a6474;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 15px;margin-bottom:18px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.legend{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;font-size:12.5px;color:#5a6474;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 15px;margin-bottom:10px}
 .legend span{display:flex;align-items:center;gap:6px}
 .lic{font-size:14px;width:20px;text-align:center;flex:none}
 .seq{display:inline-block;width:16px;height:16px;border-radius:50%;background:#5a6474;color:#fff;font-size:10px;font-weight:700;text-align:center;line-height:16px}
-section.city{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:22px;overflow:hidden}
-.city-h{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--line)}
+section.city{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:14px;overflow:hidden}
+.city-h{display:flex;align-items:center;justify-content:space-between;padding:11px 20px;border-bottom:1px solid var(--line)}
 .city-h h2{font-size:19px;color:var(--navy)}
 .city-h .badge{font-size:12px;background:#e9f0fb;color:#2e6fd8;padding:2px 10px;border-radius:999px}
 .body{display:grid;grid-template-columns:1fr 1fr;gap:0}
-.days{padding:4px 20px 14px;border-right:1px solid var(--line)}
-.day{padding:9px 0;border-bottom:1px dashed var(--line)}
+.days{padding:2px 20px 12px;border-right:1px solid var(--line)}
+.day{padding:7px 0;border-bottom:1px dashed var(--line)}
 .day:last-child{border-bottom:none}
 .day .d{font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px}.day .c{width:10px;height:10px;border-radius:3px;display:inline-block}
 .day .t{font-size:15px;font-weight:700;margin:1px 0 3px}
 .day ul{margin:4px 0 0 18px;font-size:13px;color:#4a5364}
 .day ul li{list-style:disc}
-.map{padding:12px;position:relative}
+.map{padding:8px;position:relative}
 #map-japan,#map-tokyo,#map-kamakura,#map-hakone,#map-osaka,#map-kyoto{height:470px;border-radius:12px;border:1px solid var(--line)}
 .pin{width:30px;height:30px;border-radius:50%;background:#fff;border:2.5px solid var(--pc);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.3);position:relative;font-size:14px}
 .pin.amber{--pc:#c9872d}.pin.green{--pc:#3a9d63}.pin.blue{--pc:#2e6fd8}.pin.purple{--pc:#8e6bd8}.pin.hotel{--pc:#6b4a2f}.pin.airport{--pc:#2e6fd8}.pin.opt{--pc:#a9b1bf;opacity:.78}
@@ -52,18 +52,18 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
 .day-tag{background:#e9f0fb;color:#2e6fd8;font-size:11px;padding:0 6px;border-radius:999px;margin-right:4px}
 .leaflet-tooltip{font-size:12px!important}
 .plabel{position:absolute;top:-20px;left:50%;transform:translateX(-50%);white-space:nowrap;background:rgba(255,255,255,.94);border:1px solid #d3d9e2;border-radius:5px;padding:0 5px;font-size:10.5px;color:#2b3240;box-shadow:0 1px 3px rgba(0,0,0,.18);line-height:1.5;z-index:50;max-width:150px;overflow:hidden;text-overflow:ellipsis}
-.foot{text-align:center;font-size:12px;color:#9aa3b2;padding:6px 0 24px}
+.foot{text-align:center;font-size:12px;color:#9aa3b2;padding:2px 0 18px}
 .loading{text-align:center;padding:40px;color:#9aa3b2}
-.ov{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:14px}
-.ov-h{font-weight:700;color:var(--navy);font-size:13px;margin-bottom:8px}
-.ov-grid{display:flex;flex-wrap:wrap;gap:6px}
-.ov-day{background:#f0f4fb;border-radius:8px;padding:4px 9px;font-size:12px;color:#3a4356}
+.ov{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:10px}
+.ov-h{font-weight:700;color:var(--navy);font-size:13px;margin-bottom:6px}
+.ov-grid{display:flex;flex-wrap:wrap;gap:5px}
+.ov-day{background:#f0f4fb;border-radius:8px;padding:3px 8px;font-size:12px;color:#3a4356}
 .ov-day b{color:#2e6fd8;margin-right:4px}
-.tips{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:14px;font-size:13px;color:#4a5364}
-.tips div{margin-top:4px}
+.tips{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:10px;font-size:13px;color:#4a5364}
+.tips div{margin-top:3px}
 @media(max-width:820px){
-  .wrap{padding:12px}
-  .hero{padding:22px 14px 18px}
+  .wrap{padding:0 12px}
+  .hero{padding:18px 14px 14px}
   .hero h1{font-size:22px}
   .hero .sub{font-size:12.5px}
   .flight{min-width:0;flex:1 1 100%;padding:10px 14px}
@@ -71,15 +71,15 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
   .days{border-right:none;border-bottom:1px solid var(--line);padding:4px 14px 10px}
   .city-h{padding:12px 14px}
   .city-h h2{font-size:17px}
-  section.city{margin-bottom:16px}
-  .legend{font-size:11px;gap:8px;padding:8px 10px;justify-content:flex-start;flex-direction:column;align-items:flex-start}
+  section.city{margin-bottom:10px}
+  .legend{font-size:11px;gap:8px;padding:7px 10px;justify-content:flex-start;flex-direction:column;align-items:flex-start;margin-bottom:6px}
   .legend span{width:100%}
   .map{padding:8px}
   #map-japan,#map-tokyo,#map-kamakura,#map-hakone,#map-osaka,#map-kyoto{height:320px}
   .plabel{font-size:9.5px;max-width:110px}
-  .ov{padding:10px 12px}
+  .ov{padding:8px 12px;margin-bottom:8px}
   .ov-day{font-size:11.5px}
-  .tips{padding:10px 12px;font-size:12.5px}
+  .tips{padding:8px 12px;font-size:12.5px;margin-bottom:8px}
   .day .t{font-size:14px}
   .day ul{font-size:12.5px}
   .map-leg{max-width:190px}
