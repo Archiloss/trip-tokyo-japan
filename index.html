@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f6f8fb">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -85,10 +86,18 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
   .map-leg{max-width:176px;font-size:11px}
   .map-leg .ml-hd{font-size:11.5px;padding:6px 9px}
   .map-leg .ml-body{max-height:188px;overflow:auto}
-  .leaflet-control-zoom a{width:28px;height:28px;line-height:28px}
+  .leaflet-touch .leaflet-control-zoom a,.leaflet-touch .leaflet-bar a,.leaflet-control-zoom a{width:44px;height:44px;line-height:44px;font-size:24px}
   .pwrap .plabel{display:none}
 }
 
+/* 可访问性与移动端细节 */
+.leaflet-control-zoom a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.leaflet-control-zoom a:focus{outline:2px solid var(--blue);outline-offset:2px}
+.map-leg .ml-body{overscroll-behavior:contain}
+.flight div,.day .t,.day ul,.tips div,.ov-day{font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion: reduce){
+  .leaflet-zoom-anim .leaflet-zoom-animated{transition:none!important}
+}
 </style>
 </head>
 <body>
