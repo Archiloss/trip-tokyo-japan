@@ -3753,7 +3753,7 @@
     "src": "tabelog",
     "hint": "大森海岸",
     "prec": "station",
-    "closed": "水・木・金"
+    "closed": "周三、周四、周五"
    },
    {
     "id": "t02",
@@ -3763,7 +3763,7 @@
     "src": "tabelog",
     "hint": "西新宿五丁目",
     "prec": "osm",
-    "closed": "土・日・祝"
+    "closed": "周六、周日、节假日"
    },
    {
     "id": "t03",
@@ -3773,7 +3773,7 @@
     "src": "tabelog",
     "hint": "仙川",
     "prec": "station",
-    "closed": "日",
+    "closed": "周日",
     "new": true
    },
    {
@@ -3784,7 +3784,7 @@
     "src": "tabelog",
     "hint": "池袋",
     "prec": "osm",
-    "closed": "月・火"
+    "closed": "周一、周二"
    },
    {
     "id": "t05",
@@ -3794,7 +3794,7 @@
     "src": "tabelog",
     "hint": "日向和田",
     "prec": "station",
-    "closed": "月・金"
+    "closed": "周一、周五"
    },
    {
     "id": "t06",
@@ -3804,7 +3804,7 @@
     "src": "tabelog",
     "hint": "新富町",
     "prec": "station",
-    "closed": "月"
+    "closed": "周一"
    },
    {
     "id": "t07",
@@ -3814,7 +3814,7 @@
     "src": "tabelog",
     "hint": "雑色",
     "prec": "osm",
-    "closed": "日・祝"
+    "closed": "周日、节假日"
    },
    {
     "id": "t08",
@@ -3824,7 +3824,7 @@
     "src": "tabelog",
     "hint": "秋葉原",
     "prec": "station",
-    "closed": "水"
+    "closed": "周三"
    },
    {
     "id": "t09",
@@ -3834,7 +3834,7 @@
     "src": "tabelog",
     "hint": "八王子",
     "prec": "station",
-    "closed": "月・木"
+    "closed": "周一、周四"
    },
    {
     "id": "t10",
@@ -3844,7 +3844,7 @@
     "src": "tabelog",
     "hint": "下丸子",
     "prec": "station",
-    "closed": "火・金"
+    "closed": "周二、周五"
    },
    {
     "id": "t11",
@@ -3854,7 +3854,7 @@
     "src": "tabelog",
     "hint": "荏原中延",
     "prec": "osm",
-    "closed": "水"
+    "closed": "周三"
    },
    {
     "id": "t12",
@@ -3864,7 +3864,7 @@
     "src": "tabelog",
     "hint": "祐天寺",
     "prec": "osm",
-    "closed": "月・火・日"
+    "closed": "周一、周二、周日"
    },
    {
     "id": "t13",
@@ -3874,7 +3874,7 @@
     "src": "tabelog",
     "hint": "浅草橋",
     "prec": "station",
-    "closed": "日"
+    "closed": "周日"
    },
    {
     "id": "t14",
@@ -3884,7 +3884,7 @@
     "src": "tabelog",
     "hint": "新大塚",
     "prec": "station",
-    "closed": "火"
+    "closed": "周二"
    },
    {
     "id": "t15",
@@ -3894,7 +3894,7 @@
     "src": "tabelog",
     "hint": "八幡山",
     "prec": "station",
-    "closed": "月"
+    "closed": "周一"
    },
    {
     "id": "t16",
@@ -3904,7 +3904,7 @@
     "src": "tabelog",
     "hint": "分倍河原",
     "prec": "station",
-    "closed": "水"
+    "closed": "周三"
    },
    {
     "id": "t17",
@@ -3914,7 +3914,7 @@
     "src": "tabelog",
     "hint": "六本木",
     "prec": "station",
-    "closed": "月"
+    "closed": "周一"
    },
    {
     "id": "t18",
@@ -3924,7 +3924,7 @@
     "src": "tabelog",
     "hint": "府中",
     "prec": "station",
-    "closed": "火"
+    "closed": "周二"
    },
    {
     "id": "t19",
@@ -3934,7 +3934,7 @@
     "src": "tabelog",
     "hint": "方南町",
     "prec": "station",
-    "closed": "月・火・日",
+    "closed": "周一、周二、周日",
     "new": true
    },
    {
@@ -3945,7 +3945,7 @@
     "src": "tabelog",
     "hint": "千歳船橋",
     "prec": "station",
-    "closed": "月"
+    "closed": "周一"
    },
    {
     "id": "t21",
@@ -3955,7 +3955,7 @@
     "src": "tabelog",
     "hint": "森下",
     "prec": "osm",
-    "closed": "月・金"
+    "closed": "周一、周五"
    },
    {
     "id": "t22",
@@ -3965,7 +3965,7 @@
     "src": "tabelog",
     "hint": "早稲田",
     "prec": "station",
-    "closed": "日"
+    "closed": "周日"
    },
    {
     "id": "t23",
@@ -3975,7 +3975,7 @@
     "src": "tabelog",
     "hint": "志村坂上",
     "prec": "station",
-    "closed": "月・日"
+    "closed": "周一、周日"
    }
   ]
  }
