@@ -3443,5 +3443,540 @@
     }
    ]
   }
- ]
+ ],
+ "food": {
+  "tabelog_date": "2025-12-02",
+  "sources": [
+   "Tabelog 东京拉面百名店 2025(2025-12-02 更新)",
+   "拉面 tier 榜(网络口碑:夯/顶级/人上人/NPC/拉)"
+  ],
+  "note": "门店坐标:能对上 OSM 门店的为门店级,否则退到最近车站(街区示意)",
+  "shops": [
+   {
+    "id": "g01",
+    "name": "むかん（阿佐ヶ谷）",
+    "lat": 35.70484,
+    "lon": 139.635472,
+    "src": "tier",
+    "hint": "阿佐ヶ谷",
+    "prec": "station",
+    "tier": "夯"
+   },
+   {
+    "id": "g02",
+    "name": "銀座朧月",
+    "lat": 35.671579,
+    "lon": 139.761399,
+    "src": "tier",
+    "hint": "銀座",
+    "prec": "osm",
+    "tier": "夯"
+   },
+   {
+    "id": "g03",
+    "name": "あん藤えのしま",
+    "lat": 35.30806,
+    "lon": 139.484589,
+    "src": "tier",
+    "hint": "",
+    "prec": "address",
+    "tier": "夯",
+    "away": true
+   },
+   {
+    "id": "g04",
+    "name": "麺や金時",
+    "lat": 35.738388,
+    "lon": 139.678253,
+    "src": "tier",
+    "hint": "",
+    "prec": "address",
+    "tier": "夯"
+   },
+   {
+    "id": "g05",
+    "name": "東京油組（西新宿）",
+    "lat": 35.694432,
+    "lon": 139.692767,
+    "src": "tier",
+    "hint": "西新宿",
+    "prec": "station",
+    "tier": "顶级"
+   },
+   {
+    "id": "g06",
+    "name": "鯛塩そば灯花（そごう横浜）",
+    "lat": 35.466207,
+    "lon": 139.623195,
+    "src": "tier",
+    "hint": "横浜",
+    "prec": "station",
+    "tier": "顶级",
+    "away": true
+   },
+   {
+    "id": "g07",
+    "name": "AFURI（新宿住友ビル）",
+    "lat": 35.692017,
+    "lon": 139.692459,
+    "src": "tier",
+    "hint": "新宿",
+    "prec": "address",
+    "tier": "人上人"
+   },
+   {
+    "id": "g08",
+    "name": "超俺流塩ラーメン（渋谷センター街）",
+    "lat": 35.659971,
+    "lon": 139.700077,
+    "src": "tier",
+    "hint": "渋谷",
+    "prec": "osm",
+    "tier": "人上人"
+   },
+   {
+    "id": "g09",
+    "name": "篝（六本木ヒルズ）",
+    "lat": 35.660206,
+    "lon": 139.729202,
+    "src": "tier",
+    "hint": "六本木",
+    "prec": "address",
+    "tier": "人上人"
+   },
+   {
+    "id": "g10",
+    "name": "らーめんいっとく",
+    "lat": 35.730103,
+    "lon": 139.762421,
+    "src": "tier",
+    "hint": "",
+    "prec": "address",
+    "tier": "人上人"
+   },
+   {
+    "id": "g11",
+    "name": "上野牛魔王",
+    "lat": 35.713413,
+    "lon": 139.776542,
+    "src": "tier",
+    "hint": "上野",
+    "prec": "station",
+    "tier": "人上人"
+   },
+   {
+    "id": "g12",
+    "name": "塩生姜らー麺専門店MANNISH",
+    "lat": 35.693204,
+    "lon": 139.767616,
+    "src": "tier",
+    "hint": "",
+    "prec": "osm",
+    "tier": "人上人"
+   },
+   {
+    "id": "g13",
+    "name": "キング製麺",
+    "lat": 35.754356,
+    "lon": 139.739349,
+    "src": "tier",
+    "hint": "",
+    "prec": "area",
+    "tier": "人上人"
+   },
+   {
+    "id": "g14",
+    "name": "一蘭（渋谷スペイン）",
+    "lat": 35.661129,
+    "lon": 139.700988,
+    "src": "tier",
+    "hint": "渋谷",
+    "prec": "osm",
+    "tier": "人上人"
+   },
+   {
+    "id": "g15",
+    "name": "麺処夏海",
+    "lat": 35.779755,
+    "lon": 139.720123,
+    "src": "tier",
+    "hint": "",
+    "prec": "address",
+    "tier": "人上人"
+   },
+   {
+    "id": "g16",
+    "name": "ラーメン大戦争（水道橋）",
+    "lat": 35.702045,
+    "lon": 139.753738,
+    "src": "tier",
+    "hint": "水道橋",
+    "prec": "station",
+    "tier": "人上人"
+   },
+   {
+    "id": "g17",
+    "name": "麺や百日紅",
+    "lat": 35.690903,
+    "lon": 139.705406,
+    "src": "tier",
+    "hint": "",
+    "prec": "osm",
+    "tier": "人上人"
+   },
+   {
+    "id": "g18",
+    "name": "えびそば一幻（新宿）",
+    "lat": 35.695459,
+    "lon": 139.698011,
+    "src": "tier",
+    "hint": "新宿",
+    "prec": "osm",
+    "tier": "人上人"
+   },
+   {
+    "id": "g19",
+    "name": "ゆうひ屋",
+    "lat": 35.780739,
+    "lon": 139.720612,
+    "src": "tier",
+    "hint": "",
+    "prec": "area",
+    "tier": "人上人"
+   },
+   {
+    "id": "g20",
+    "name": "ラーメン豚山（仙台）",
+    "lat": 38.259753,
+    "lon": 140.880025,
+    "src": "tier",
+    "hint": "仙台",
+    "prec": "station",
+    "tier": "NPC",
+    "away": true
+   },
+   {
+    "id": "g21",
+    "name": "はやし田（赤羽）",
+    "lat": 35.7781,
+    "lon": 139.720713,
+    "src": "tier",
+    "hint": "赤羽",
+    "prec": "station",
+    "tier": "NPC"
+   },
+   {
+    "id": "g22",
+    "name": "むかん（池袋）",
+    "lat": 35.728092,
+    "lon": 139.711037,
+    "src": "tier",
+    "hint": "池袋",
+    "prec": "station",
+    "tier": "NPC"
+   },
+   {
+    "id": "g23",
+    "name": "屋台至上伊粋",
+    "lat": 35.777851,
+    "lon": 139.720993,
+    "src": "tier",
+    "hint": "",
+    "prec": "area",
+    "tier": "拉"
+   },
+   {
+    "id": "g24",
+    "name": "博多風龍（秋葉原）",
+    "lat": 35.698394,
+    "lon": 139.775227,
+    "src": "tier",
+    "hint": "秋葉原",
+    "prec": "osm",
+    "tier": "拉"
+   },
+   {
+    "id": "g25",
+    "name": "麺屋一燈",
+    "lat": 35.718894,
+    "lon": 139.857773,
+    "src": "tier",
+    "hint": "",
+    "prec": "osm",
+    "tier": "拉"
+   },
+   {
+    "id": "g26",
+    "name": "博多天神（新宿御苑店）",
+    "lat": 35.689842,
+    "lon": 139.707408,
+    "src": "tier",
+    "hint": "新宿御苑前",
+    "prec": "osm",
+    "tier": "拉"
+   },
+   {
+    "id": "g27",
+    "name": "赤坂一点張",
+    "lat": 35.674417,
+    "lon": 139.737881,
+    "src": "tier",
+    "hint": "赤坂",
+    "prec": "osm",
+    "tier": "拉"
+   },
+   {
+    "id": "g28",
+    "name": "天下一品（渋谷）",
+    "lat": 35.660714,
+    "lon": 139.69805,
+    "src": "tier",
+    "hint": "渋谷",
+    "prec": "osm",
+    "tier": "拉"
+   },
+   {
+    "id": "g29",
+    "name": "神座（赤羽/渋谷）",
+    "lat": 35.660597,
+    "lon": 139.698283,
+    "src": "tier",
+    "hint": "渋谷",
+    "prec": "osm",
+    "tier": "拉"
+   },
+   {
+    "id": "t01",
+    "name": "Homemade Ramen 麦苗",
+    "lat": 35.587699,
+    "lon": 139.735394,
+    "src": "tabelog",
+    "hint": "大森海岸",
+    "prec": "station",
+    "closed": "水・木・金"
+   },
+   {
+    "id": "t02",
+    "name": "らぁ麺や 嶋",
+    "lat": 35.688348,
+    "lon": 139.68094,
+    "src": "tabelog",
+    "hint": "西新宿五丁目",
+    "prec": "osm",
+    "closed": "土・日・祝"
+   },
+   {
+    "id": "t03",
+    "name": "中華そば しば田",
+    "lat": 35.662345,
+    "lon": 139.585016,
+    "src": "tabelog",
+    "hint": "仙川",
+    "prec": "station",
+    "closed": "日",
+    "new": true
+   },
+   {
+    "id": "t04",
+    "name": "ジャパニーズ ラーメン 五感",
+    "lat": 35.733046,
+    "lon": 139.717858,
+    "src": "tabelog",
+    "hint": "池袋",
+    "prec": "osm",
+    "closed": "月・火"
+   },
+   {
+    "id": "t05",
+    "name": "Ramen Feel",
+    "lat": 35.787956,
+    "lon": 139.22997,
+    "src": "tabelog",
+    "hint": "日向和田",
+    "prec": "station",
+    "closed": "月・金"
+   },
+   {
+    "id": "t06",
+    "name": "銀座 八五",
+    "lat": 35.670634,
+    "lon": 139.77342,
+    "src": "tabelog",
+    "hint": "新富町",
+    "prec": "station",
+    "closed": "月"
+   },
+   {
+    "id": "t07",
+    "name": "宍道湖しじみ中華蕎麦 琥珀 東京本店",
+    "lat": 35.551246,
+    "lon": 139.711188,
+    "src": "tabelog",
+    "hint": "雑色",
+    "prec": "osm",
+    "closed": "日・祝"
+   },
+   {
+    "id": "t08",
+    "name": "Tokyo Style Noodle ほたて日和",
+    "lat": 35.698825,
+    "lon": 139.774291,
+    "src": "tabelog",
+    "hint": "秋葉原",
+    "prec": "station",
+    "closed": "水"
+   },
+   {
+    "id": "t09",
+    "name": "中華そば 鴨福",
+    "lat": 35.655389,
+    "lon": 139.339467,
+    "src": "tabelog",
+    "hint": "八王子",
+    "prec": "station",
+    "closed": "月・木"
+   },
+   {
+    "id": "t10",
+    "name": "奈つやの中華そば",
+    "lat": 35.571386,
+    "lon": 139.685595,
+    "src": "tabelog",
+    "hint": "下丸子",
+    "prec": "station",
+    "closed": "火・金"
+   },
+   {
+    "id": "t11",
+    "name": "中華そば 多賀野",
+    "lat": 35.609712,
+    "lon": 139.711543,
+    "src": "tabelog",
+    "hint": "荏原中延",
+    "prec": "osm",
+    "closed": "水"
+   },
+   {
+    "id": "t12",
+    "name": "Ramen Break Beats",
+    "lat": 35.63353,
+    "lon": 139.698762,
+    "src": "tabelog",
+    "hint": "祐天寺",
+    "prec": "osm",
+    "closed": "月・火・日"
+   },
+   {
+    "id": "t13",
+    "name": "饗 くろ喜",
+    "lat": 35.697392,
+    "lon": 139.78631,
+    "src": "tabelog",
+    "hint": "浅草橋",
+    "prec": "station",
+    "closed": "日"
+   },
+   {
+    "id": "t14",
+    "name": "創作麺工房 鳴龍",
+    "lat": 35.725782,
+    "lon": 139.729923,
+    "src": "tabelog",
+    "hint": "新大塚",
+    "prec": "station",
+    "closed": "火"
+   },
+   {
+    "id": "t15",
+    "name": "麺処 しろくろ",
+    "lat": 35.669883,
+    "lon": 139.615709,
+    "src": "tabelog",
+    "hint": "八幡山",
+    "prec": "station",
+    "closed": "月"
+   },
+   {
+    "id": "t16",
+    "name": "手打ち 陰日向",
+    "lat": 35.668447,
+    "lon": 139.468995,
+    "src": "tabelog",
+    "hint": "分倍河原",
+    "prec": "station",
+    "closed": "水"
+   },
+   {
+    "id": "t17",
+    "name": "入鹿TOKYO 六本木",
+    "lat": 35.662836,
+    "lon": 139.731327,
+    "src": "tabelog",
+    "hint": "六本木",
+    "prec": "station",
+    "closed": "月"
+   },
+   {
+    "id": "t18",
+    "name": "中華蕎麦 ひら井",
+    "lat": 35.672219,
+    "lon": 139.480009,
+    "src": "tabelog",
+    "hint": "府中",
+    "prec": "station",
+    "closed": "火"
+   },
+   {
+    "id": "t19",
+    "name": "創作麺 ひとすじ",
+    "lat": 35.683501,
+    "lon": 139.657689,
+    "src": "tabelog",
+    "hint": "方南町",
+    "prec": "station",
+    "closed": "月・火・日",
+    "new": true
+   },
+   {
+    "id": "t20",
+    "name": "らーめんMAIKAGURA",
+    "lat": 35.647399,
+    "lon": 139.623821,
+    "src": "tabelog",
+    "hint": "千歳船橋",
+    "prec": "station",
+    "closed": "月"
+   },
+   {
+    "id": "t21",
+    "name": "手打ち 蓮",
+    "lat": 35.691461,
+    "lon": 139.795876,
+    "src": "tabelog",
+    "hint": "森下",
+    "prec": "osm",
+    "closed": "月・金"
+   },
+   {
+    "id": "t22",
+    "name": "自家製中華そば としおか",
+    "lat": 35.705803,
+    "lon": 139.721191,
+    "src": "tabelog",
+    "hint": "早稲田",
+    "prec": "station",
+    "closed": "日"
+   },
+   {
+    "id": "t23",
+    "name": "中華ソバ 伊吹",
+    "lat": 35.775669,
+    "lon": 139.695529,
+    "src": "tabelog",
+    "hint": "志村坂上",
+    "prec": "station",
+    "closed": "月・日"
+   }
+  ]
+ }
 }
