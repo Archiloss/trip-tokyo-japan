@@ -274,8 +274,6 @@ function foodGroupOf(s){ if(s.src==='tabelog')return 0; if(s.away)return 3; retu
 function renderFood(food){
   const T=food.shops.filter(s=>s.src==='tabelog');
   const G=food.shops.filter(s=>s.src==='tier');
-  const list=T.map(s=>'<li><div class="nm">'+s.name+(s.new?'<span class="chip-n">初選出</span>':'')+'</div>'
-      +'<div class="mt">🚉 '+(s.hint||'—')+(s.hint&&s.hint.slice(-1)!=='駅'?'駅':'')+(s.closed?' · 🕒 定休 '+s.closed:'')+'</div></li>').join('');
   const tierRows=TIERS.map(t=>{
     const arr=G.filter(s=>s.tier===t);
     if(!arr.length) return '';
@@ -284,16 +282,14 @@ function renderFood(food){
   }).join('');
   return '<div class="wrap" id="sec-food">'
    + '<div class="food-card"><div class="food-h"><h2>🍜 东京拉面美食地图</h2>'
-   + '<span class="badge">Tabelog 百名店 2025(官方榜) + 网络 tier 榜</span></div>'
+   + '<span class="badge">tier 榜 '+G.length+' 家 · 百名店 '+T.length+' 家(可开)</span></div>'
    + '<div class="food-bar"><button type="button" id="btn-locate" class="loc-btn">📍 我附近的美食</button>'
    + '<span id="loc-msg" class="loc-msg">点一下 = 取一次当前位置(不持续追踪)，按距离列出最近的店；需要在 https 页面(如 GitHub Pages)才给定位</span></div>'
    + '<div id="loc-panel" class="loc-panel" hidden></div>'
    + '<div id="map-food"></div>'
-   + '<div class="food-note">共 '+food.shops.length+' 家 · 右上角图例可勾选分组 · 门店类坐标为<b>街区示意</b>(以实际为准) · 定休日=去之前再确认一次</div></div>'
-   + '<div class="food-cols">'
-   + '<div class="food-card"><div class="fc-h"><span>🏆 Tabelog 百名店</span><span class="badge">'+T.length+' 家 · 2025.12 更新</span></div><ul>'+list+'</ul></div>'
+   + '<div class="food-note">地图默认只显示 tier 榜 '+G.length+' 家 · 右上角图例可勾选加开 Tabelog 百名店 '+T.length+' 家 · 坐标为<b>街区示意</b>(以实际为准) · 定休日=去之前再确认一次</div></div>'
    + '<div class="food-card"><div class="fc-h"><span>🔥 拉面 tier 榜</span><span class="badge">'+G.length+' 家 · 网友口碑</span></div>'+tierRows+'</div>'
-   + '</div></div>';
+   + '</div>';
 }
 function renderFoodMap(food){
   const isMobile=(window.innerWidth<=820)||('ontouchstart' in window && window.innerWidth<1000);
@@ -315,13 +311,13 @@ function renderFoodMap(food){
     mk.bindTooltip(s.name,{direction:'top',offset:[0,-12]});
     mk.addTo(groups[foodGroupOf(s)]);
   });
-  groups.forEach((g,i)=>{ if(i<2) g.addTo(m); });
+  groups.forEach((g,i)=>{ if(i===1) g.addTo(m); });
   const leg=L.control({position:'topright'});
   leg.onAdd=()=>{
     const d=L.DomUtil.create('div','map-leg open');
     const rows=[['🏆 Tabelog 百名店',0],['🔥 tier 榜 · 夯/顶级/人上人',1],['💤 tier 榜 · NPC/拉',2],['📍 都外(横浜/仙台)',3]];
     d.innerHTML='<div class="ml-hd">🧭 美食地图图例 ▴</div><div class="ml-body">'
-      + rows.map(r=>'<label class="ml-cb"><input type="checkbox" data-g="'+r[1]+'" '+(r[1]<2?'checked':'')+'>'+r[0]+' <b style="color:#8a93a3">('+groups[r[1]].getLayers().length+')</b></label>').join('')
+      + rows.map(r=>'<label class="ml-cb"><input type="checkbox" data-g="'+r[1]+'" '+(r[1]===1?'checked':'')+'>'+r[0]+' <b style="color:#8a93a3">('+groups[r[1]].getLayers().length+')</b></label>').join('')
       + '<div class="ml-sub">● 绿=Tabelog · 红=夯 · 橙=顶级 · 紫=人上人 · 蓝=NPC · 灰=拉</div></div>';
     L.DomEvent.disableClickPropagation(d);
     d.querySelectorAll('input').forEach(cb=>cb.onchange=()=>{const i=+cb.dataset.g;if(cb.checked)groups[i].addTo(m);else m.removeLayer(groups[i]);});
@@ -449,16 +445,9 @@ loadData().then(data=>{
     <div>· <b>行李</b>:9/27 镰仓大件留酒店;9/29 若改镰仓 → 寄镰仓站</div>
     <div>· <b>其他</b>:现金+Suica/ICOCA;箱根备浴衣;二奢去代官山/中目黑/表参道/银座</div>
   </div></div>`;
-  const eats=`<div class="wrap"><div class="tips"><div class="ov-h">🍱 必吃清单</div>
-    <div>· <b>东京</b>:筑地场外海鲜 · 银座和牛寿司 · 一兰拉面 · 代官山咖啡</div>
-    <div>· <b>镰仓</b>:小町通抹茶甜筒 · 江之岛海鲜丼</div>
-    <div>· <b>箱根</b>:温泉旅馆怀石 · 大涌谷黑玉子</div>
-    <div>· <b>京都</b>:宇治抹茶(中村藤吉) · 锦市场小吃 · 汤豆腐怀石 · 和果子</div>
-    <div>· <b>大阪</b>:黑门市场(海鲜·河豚) · 道顿堀章鱼烧·大阪烧 · 神户牛(神户备选)</div>
-  </div></div>`;
   const foot=`<div class="wrap"><div class="foot">酒店/二奢店坐标为街区示意(酒店锚点待定,定了我更新) · 数字=当天先后顺序 · 数据源 data.json · 地图 © OpenStreetMap · Leaflet</div></div>`;
   const food=data.food?renderFood(data.food):'';
-  app.innerHTML=hero+overview+legend+tips+eats+food+sections+foot;
+  app.innerHTML=hero+overview+legend+tips+food+sections+foot;
   buildSide(data);
   data.cities.forEach(c=>renderMap(c.id,c));
   if(data.food){ renderFoodMap(data.food); initLocate(data.food); }
