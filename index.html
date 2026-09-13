@@ -128,6 +128,14 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
 .lp-i.over{border-left-color:#e58f2b}
 .lp-w{color:#2e6fd8;font-size:11px;font-weight:600}
 .lp-note{padding:8px 20px 12px;color:#8a93a3;font-size:11.5px;line-height:1.6}
+.src-chips{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:8px 16px 0}
+.chip{border:1px solid #e3ecf8;background:#fff;color:#5a6474;border-radius:999px;padding:5px 11px;font-size:12px;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:5px}
+.chip.on{background:var(--c);border-color:var(--c);color:#fff}
+.chip.off{opacity:.45;color:#aab3c0}
+.chip b{font-weight:700;font-size:11px;opacity:.9}
+.chip-key{display:flex;align-items:center;gap:9px;font-size:11px;color:#8a93a3;margin-left:2px}
+.chip-key .key{display:flex;align-items:center;gap:3px}
+.chip-key i{width:8px;height:8px;border-radius:50%;display:inline-block}
 .fl-src{font-weight:700;color:var(--navy);margin:9px 0 3px;font-size:13px;display:flex;align-items:center;gap:5px}
 .fl-i{padding:3px 0;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;gap:10px}
 .fl-i:last-child{border-bottom:none}
@@ -151,8 +159,18 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
   .legend{font-size:11px;gap:8px;padding:7px 10px;justify-content:flex-start;flex-direction:column;align-items:flex-start;margin-bottom:6px}
   .legend > span{width:100%}
   .map{padding:8px}
-  #map-tokyo,#map-kamakura,#map-hakone,#map-osaka,#map-kyoto,#map-food{height:320px}
-  #map-food{margin:8px}
+  #map-tokyo,#map-kamakura,#map-hakone,#map-osaka,#map-kyoto{height:320px}
+  #map-food{height:min(58vh,430px);margin:6px}
+  .food-h .badge{display:none}
+  .region-tabs{flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;padding-bottom:3px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .region-tabs::-webkit-scrollbar{display:none}
+  .rtab{flex:0 0 auto;padding:5px 9px;font-size:12px;gap:4px}
+  .rtab .rc{font-size:10.5px;padding:0 5px}
+  .rtab .rcb{display:none}
+  .food-sub{font-size:11.5px;padding:6px 12px 0}
+  .src-chips{padding:8px 12px 0}
+  .chip{padding:5px 10px;font-size:11.5px}
+  .food-note{padding:8px 12px 12px;font-size:11.5px}
   .food-cols{grid-template-columns:1fr;gap:0}
   .food-h{padding:12px 14px}
   .food-h h2{font-size:17px}
@@ -292,9 +310,9 @@ function renderMap(id,cfg){
 
 /* ===== 美食地图（多城市 · Tabelog百名店 / tier榜 / 自己找的） ===== */
 const SRC_META={
-  tabelog:{ic:'🏆',name:'Tabelog 百名店',color:'#2fb98c'},
-  tier:{ic:'🔥',name:'tier 榜(网友)',color:'#d64541'},
-  mine:{ic:'📌',name:'自己找的',color:'#2e6fd8'}
+  tabelog:{ic:'🏆',name:'Tabelog 百名店',short:'百名店',color:'#2fb98c'},
+  tier:{ic:'🔥',name:'tier 榜(网友)',short:'tier 榜',color:'#d64541'},
+  mine:{ic:'📌',name:'自己找的',short:'自己找的',color:'#2e6fd8'}
 };
 const TIER_COLOR={夯:'#d64541',顶级:'#e58f2b',人上人:'#8e6bd8',NPC:'#2e6fd8',拉:'#9aa3b2'};
 const TIERS=['夯','顶级','人上人'];
@@ -312,7 +330,7 @@ function renderFood(food){
   const tabs=food.regions.map((r,i)=>{
     const n=food.shops.filter(s=>s.region===r.id&&!isDropped(s)&&s.lat!=null).length;
     return '<button type="button" class="rtab'+(i===0?' on':'')+'" data-r="'+r.id+'">'+r.name
-      +'<span class="rc">'+n+'</span>'+(r.badge?'<span class="rc">'+r.badge+'</span>':'')+'</button>';
+      +'<span class="rc">'+n+'</span>'+(r.badge?'<span class="rc rcb">'+r.badge+'</span>':'')+'</button>';
   }).join('');
   return '<div class="wrap" id="sec-food">'
    + '<div class="food-card"><div class="food-h"><h2>🍜 美食地图 · 拉面</h2>'
@@ -322,6 +340,7 @@ function renderFood(food){
    + '<div class="food-sub" id="loc-msg">点「我附近的美食」只取一次位置(不持续追踪)，只在 <b>3km</b>（约步行 40 分钟）内找；需在 https 页面才给定位</div>'
    + '<div id="loc-panel" class="loc-panel" hidden></div>'
    + '<div id="map-food"></div>'
+   + '<div class="src-chips" id="food-chips"></div>'
    + '<div class="food-note" id="food-note"></div></div>'
    + '<details class="food-card food-list"><summary>📋 本地区店名单</summary><div class="fl-body" id="food-list-body"></div></details>'
    + '</div>';
@@ -333,15 +352,6 @@ function renderFoodMap(){
   FOOD.map=m; window._foodMap=m;
   addTiles(m);
   FOOD.layer=L.layerGroup().addTo(m);
-  const leg=L.control({position:'topright'});
-  leg.onAdd=()=>{
-    const d=L.DomUtil.create('div','map-leg open');
-    d.innerHTML='<div class="ml-hd">🧭 图例 ▴</div><div class="ml-body" id="food-leg-body"></div>';
-    L.DomEvent.disableClickPropagation(d);
-    d.querySelector('.ml-hd').onclick=()=>{const o=d.classList.toggle('open');d.querySelector('.ml-hd').textContent='🧭 图例 '+(o?'▴':'▾');};
-    return d;
-  };
-  leg.addTo(m);
 }
 
 function drawFood(){
@@ -372,15 +382,16 @@ function drawFood(){
 function updateFoodUI(all,list){
   const counts={};
   all.forEach(s=>counts[s.src]=(counts[s.src]||0)+1);
-  const leg=document.getElementById('food-leg-body');
-  if(leg){
-    const rows=Object.keys(SRC_META).filter(k=>counts[k]).map(k=>
-      '<label class="ml-cb"><input type="checkbox" data-s="'+k+'" '+(FOOD.enabled[k]?'checked':'')+'>'
-      +SRC_META[k].ic+' '+SRC_META[k].name+' <b style="color:#8a93a3">('+counts[k]+')</b></label>').join('');
+  const chips=document.getElementById('food-chips');
+  if(chips){
     const key=TIERS.filter(t=>all.some(s=>s.tier===t))
-      .map(t=>'<span class="bdot" style="background:'+TIER_COLOR[t]+'"></span>'+t).join(' ');
-    leg.innerHTML=rows+(key?'<div class="ml-sub">'+key+'</div>':'');
-    leg.querySelectorAll('input').forEach(cb=>cb.onchange=()=>{FOOD.enabled[cb.dataset.s]=cb.checked;drawFood();});
+      .map(t=>'<span class="key"><i style="background:'+TIER_COLOR[t]+'"></i>'+t+'</span>').join('');
+    chips.innerHTML=Object.keys(SRC_META).filter(k=>counts[k]).map(k=>
+        '<button type="button" class="chip'+(FOOD.enabled[k]?' on':' off')+'" data-s="'+k+'" style="--c:'+SRC_META[k].color+'">'
+        +SRC_META[k].ic+' '+SRC_META[k].short+' <b>'+counts[k]+'</b></button>').join('')
+      + (key?'<span class="chip-key">'+key+'</span>':'');
+    chips.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{
+      FOOD.enabled[b.dataset.s]=!FOOD.enabled[b.dataset.s]; drawFood();});
   }
   const note=document.getElementById('food-note');
   if(note){
