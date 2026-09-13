@@ -136,6 +136,12 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
 .chip-key{display:flex;align-items:center;gap:9px;font-size:11px;color:#8a93a3;margin-left:2px}
 .chip-key .key{display:flex;align-items:center;gap:3px}
 .chip-key i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.mleg{padding:2px 14px 11px}
+.mleg-row{display:flex;flex-wrap:wrap;align-items:center;gap:4px 11px;font-size:11.5px;color:#5a6474;margin-top:5px}
+.mleg-h{font-weight:700;color:var(--navy)}
+.mleg-i{display:flex;align-items:center;gap:4px}
+.mleg-i .ln{width:16px;height:3px;border-radius:2px;display:inline-block}
+.mleg-i .ic{font-style:normal}
 .fl-src{font-weight:700;color:var(--navy);margin:9px 0 3px;font-size:13px;display:flex;align-items:center;gap:5px}
 .fl-i{padding:3px 0;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;gap:10px}
 .fl-i:last-child{border-bottom:none}
@@ -159,7 +165,9 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
   .legend{font-size:11px;gap:8px;padding:7px 10px;justify-content:flex-start;flex-direction:column;align-items:flex-start;margin-bottom:6px}
   .legend > span{width:100%}
   .map{padding:8px}
-  #map-tokyo,#map-kamakura,#map-hakone,#map-osaka,#map-kyoto{height:320px}
+  #map-tokyo,#map-kamakura,#map-hakone,#map-osaka,#map-kyoto{height:min(52vh,380px)}
+  .mleg{padding:2px 10px 10px}
+  .mleg-row{font-size:11px;gap:4px 9px}
   #map-food{height:min(58vh,430px);margin:6px}
   .food-h .badge{display:none}
   .region-tabs{flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;padding-bottom:3px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
@@ -237,7 +245,7 @@ function renderCity(cfg){
           <ul>${d.itinerary.map(i=>'<li>'+i+'</li>').join('')}</ul>
         </div>`).join('')}
       </div>
-      <div class="map"><div id="map-${cfg.id}" data-id="${cfg.id}"></div></div>
+      <div class="map"><div id="map-${cfg.id}" data-id="${cfg.id}"></div><div class="mleg" id="leg-${cfg.id}"></div></div>
     </div>
   </section>`;
   const tmp=document.createElement('div');tmp.innerHTML=html;
@@ -291,19 +299,25 @@ function renderMap(id,cfg){
     mk.bindPopup('<b>'+dayTag+(ICON[p.type]||'')+' '+p.name+'</b><br>'+p.desc);
     mk.bindTooltip((p.order>0?p.order+'. ':'')+p.name,{direction:'top',offset:[0,-16]});
   });
-  if(cfg.routes.length || cfg.pois.length){
-    const leg=L.control({position:'topright'});
-    leg.onAdd=()=>{const d=L.DomUtil.create('div','map-leg');
-      const used=[...new Set(cfg.pois.map(p=>p.type))].filter(t=>TYPE_NAME[t]);
-      d.innerHTML='<div class="ml-hd">🧭 '+cfg.city+' 图例 ▾</div><div class="ml-body">'
-        +'<div class="ml-h">路线</div>'
-        +cfg.routes.map(r=>'<div class="ml-i"><span class="sw" style="background:'+r.color+'"></span>'+r.label+'</div>').join('')
-        +'<div class="ml-h">点位</div>'
-        +used.map(t=>'<div class="ml-i"><span class="lic">'+(ICON[t]||'•')+'</span>'+TYPE_NAME[t]+'</div>').join('')
-        +'</div>';
-      d.querySelector('.ml-hd').onclick=()=>{const o=d.classList.toggle('open');d.querySelector('.ml-hd').textContent='🧭 '+cfg.city+' 图例 '+(o?'▴':'▾');};
-      return d;};
-    leg.addTo(m);
+  if(isMobile){                       // 手机上按全部点位自动取景(固定中心/缩放在窄屏会切掉点)
+    const all=[];
+    cfg.pois.forEach(p=>all.push(p.coord));
+    cfg.routes.forEach(r=>{
+      const pts=(r.geom&&r.geom.length>1?r.geom:r.pts);
+      pts.forEach(pt=>all.push(pt==='@hotel'?(cfg.pois.find(p=>p.type==='hotel')||{}).coord||pt:pt));
+    });
+    const ok=all.filter(q=>Array.isArray(q)&&q.length===2&&typeof q[0]==='number');
+    if(ok.length>1) m.fitBounds(L.latLngBounds(ok).pad(0.14));
+  }
+  const strip=document.getElementById('leg-'+id);
+  if(strip && (cfg.routes.length||cfg.pois.length)){
+    const used=[...new Set(cfg.pois.map(p=>p.type))].filter(t=>TYPE_NAME[t]);
+    let hh='';
+    if(cfg.routes.length) hh+='<div class="mleg-row"><span class="mleg-h">路线</span>'
+      +cfg.routes.map(r=>'<span class="mleg-i"><i class="ln" style="background:'+r.color+'"></i>'+r.label+'</span>').join('')+'</div>';
+    if(used.length) hh+='<div class="mleg-row"><span class="mleg-h">点位</span>'
+      +used.map(t=>'<span class="mleg-i"><i class="ic">'+(ICON[t]||'•')+'</i>'+TYPE_NAME[t]+'</span>').join('')+'</div>';
+    strip.innerHTML=hh;
   }
   return m;
 }
