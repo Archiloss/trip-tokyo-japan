@@ -21,10 +21,6 @@ body{font-family:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei
 .flight .tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:999px;margin-bottom:6px}
 .flight b{font-size:15px}.flight div{opacity:.92;margin-top:3px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
-.legend{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;font-size:12.5px;color:#5a6474;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 15px;margin-bottom:10px}
-.legend > span{display:flex;align-items:center;gap:6px}
-.lic{font-size:14px;width:20px;text-align:center;flex:none}
-.seq{display:inline-block;width:16px;height:16px;border-radius:50%;background:#5a6474;color:#fff;font-size:10px;font-weight:700;text-align:center;line-height:16px}
 section.city{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:14px;overflow:hidden}
 .city-h{display:flex;align-items:center;justify-content:space-between;padding:11px 20px;border-bottom:1px solid var(--line)}
 .city-h h2{font-size:19px;color:var(--navy)}
@@ -162,8 +158,6 @@ section.city{background:var(--card);border:1px solid var(--line);border-radius:1
   .city-h{padding:12px 14px}
   .city-h h2{font-size:17px}
   section.city{margin-bottom:10px}
-  .legend{font-size:11px;gap:8px;padding:7px 10px;justify-content:flex-start;flex-direction:column;align-items:flex-start;margin-bottom:6px}
-  .legend > span{width:100%}
   .map{padding:8px}
   #map-tokyo,#map-kamakura,#map-hakone,#map-osaka,#map-kyoto{height:min(52vh,380px)}
   .mleg{padding:2px 10px 10px}
@@ -555,15 +549,6 @@ loadData().then(data=>{
     <div class="flights">${mf.flights.map(f=>
       `<div class="flight"><span class="tag" style="background:${f.color}">${f.tag}</span><br><b>${f.date}</b><div>${f.desc}</div></div>`).join('')}
     </div></div>`;
-  const legend=`<div class="wrap"><div class="legend">
-    <span><span class="lic">👜</span>二奢/买手店</span>
-    <span><span class="lic">⛩️</span>景点/古迹</span>
-    <span><span class="lic">🚉</span>车站/交通</span>
-    <span><span class="lic">🛍️</span>商圈/观景</span>
-    <span><span class="lic">🏨</span>酒店/机场</span>
-    <span><span class="seq">1</span>数字=当天走访顺序</span>
-    <span>图标=点位类型 · 色条=当天路线(见各图右上角)</span>
-  </div></div>`;
   const sections=data.cities.map(c=>'<div class="wrap" id="sec-'+c.id+'">'+renderCity(c)+'</div>').join('');
   const overview=`<div class="wrap" id="sec-overview"><div class="ov"><div class="ov-h">📅 行程速览</div><div class="ov-grid">
     <div class="ov-day"><b>9/26</b>东京·六本木</div>
@@ -586,7 +571,7 @@ loadData().then(data=>{
   </div></div>`;
   const foot=`<div class="wrap"><div class="foot">酒店/二奢店坐标为街区示意(酒店锚点待定,定了我更新) · 数字=当天先后顺序 · 数据源 data.json · 地图 © OpenStreetMap · Leaflet</div></div>`;
   const food=data.food?renderFood(data.food):'';
-  app.innerHTML=hero+overview+legend+tips+food+sections+foot;
+  app.innerHTML=hero+overview+tips+food+sections+foot;
   buildSide(data);
   data.cities.forEach(c=>renderMap(c.id,c));
   if(data.food){ initFood(data.food); initLocate(); }
