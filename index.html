@@ -268,12 +268,15 @@ function renderMap(id,cfg){
 }
 
 /* ===== 美食地图 ===== */
-const FOOD_COLOR={tabelog:'#2fb98c',夯:'#d64541',顶级:'#e58f2b',人上人:'#8e6bd8',NPC:'#2e6fd8',拉:'#9aa3b2'};
-const TIERS=['夯','顶级','人上人','NPC','拉'];
-function foodGroupOf(s){ if(s.src==='tabelog')return 0; if(s.away)return 3; return (s.tier==='NPC'||s.tier==='拉')?2:1; }
+const FOOD_COLOR={tabelog:'#2fb98c',夯:'#d64541',顶级:'#e58f2b',人上人:'#8e6bd8'};
+const TIERS=['夯','顶级','人上人'];
+const DROP_TIERS=['NPC','拉'];   // 用户要求不收这两档
+const isDropped=s=>s.src==='tier'&&DROP_TIERS.indexOf(s.tier)>=0;
+function foodGroupOf(s){ if(s.src==='tabelog')return 0; if(s.away)return 2; return 1; }
 function renderFood(food){
   const T=food.shops.filter(s=>s.src==='tabelog');
-  const G=food.shops.filter(s=>s.src==='tier');
+  const G=food.shops.filter(s=>s.src==='tier'&&!isDropped(s));
+  const Gin=G.filter(s=>!s.away).length, Gout=G.filter(s=>s.away).length;
   const tierRows=TIERS.map(t=>{
     const arr=G.filter(s=>s.tier===t);
     if(!arr.length) return '';
@@ -287,7 +290,7 @@ function renderFood(food){
    + '<span id="loc-msg" class="loc-msg">点一下 = 取一次当前位置(不持续追踪)，按距离列出最近的店；需要在 https 页面(如 GitHub Pages)才给定位</span></div>'
    + '<div id="loc-panel" class="loc-panel" hidden></div>'
    + '<div id="map-food"></div>'
-   + '<div class="food-note">地图默认只显示 tier 榜 '+G.length+' 家 · 右上角图例可勾选加开 Tabelog 百名店 '+T.length+' 家 · 坐标为<b>街区示意</b>(以实际为准) · 定休日=去之前再确认一次</div></div>'
+   + '<div class="food-note">地图默认显示 tier 榜都内 '+Gin+' 家 · 右上角图例可勾选加开 都外 '+Gout+' 家 / Tabelog 百名店 '+T.length+' 家 · 坐标为<b>街区示意</b>(以实际为准) · 定休日=去之前再确认一次</div></div>'
    + '<div class="food-card"><div class="fc-h"><span>🔥 拉面 tier 榜</span><span class="badge">'+G.length+' 家 · 网友口碑</span></div>'+tierRows+'</div>'
    + '</div>';
 }
@@ -296,9 +299,9 @@ function renderFoodMap(food){
   const m=L.map('map-food',{scrollWheelZoom:!isMobile}).setView([35.70,139.72],11);
   window._foodMap=m;
   addTiles(m);
-  const groups=[L.layerGroup(),L.layerGroup(),L.layerGroup(),L.layerGroup()];
+  const groups=[L.layerGroup(),L.layerGroup(),L.layerGroup()];
   food.shops.forEach(s=>{
-    if(s.lat==null||s.lon==null) return;
+    if(s.lat==null||s.lon==null||isDropped(s)) return;
     const col=FOOD_COLOR[s.src==='tabelog'?'tabelog':s.tier]||'#8899aa';
     const big=s.src==='tabelog', size=big?20:14;
     const icon=L.divIcon({className:'',iconSize:[size,size],iconAnchor:[size/2,size/2],
@@ -315,10 +318,10 @@ function renderFoodMap(food){
   const leg=L.control({position:'topright'});
   leg.onAdd=()=>{
     const d=L.DomUtil.create('div','map-leg open');
-    const rows=[['🏆 Tabelog 百名店',0],['🔥 tier 榜 · 夯/顶级/人上人',1],['💤 tier 榜 · NPC/拉',2],['📍 都外(横浜/仙台)',3]];
+    const rows=[['🏆 Tabelog 百名店',0],['🔥 tier 榜 · 夯/顶级/人上人',1],['📍 都外(江ノ島/横浜)',2]];
     d.innerHTML='<div class="ml-hd">🧭 美食地图图例 ▴</div><div class="ml-body">'
       + rows.map(r=>'<label class="ml-cb"><input type="checkbox" data-g="'+r[1]+'" '+(r[1]===1?'checked':'')+'>'+r[0]+' <b style="color:#8a93a3">('+groups[r[1]].getLayers().length+')</b></label>').join('')
-      + '<div class="ml-sub">● 绿=Tabelog · 红=夯 · 橙=顶级 · 紫=人上人 · 蓝=NPC · 灰=拉</div></div>';
+      + '<div class="ml-sub">● 绿=Tabelog · 红=夯 · 橙=顶级 · 紫=人上人</div></div>';
     L.DomEvent.disableClickPropagation(d);
     d.querySelectorAll('input').forEach(cb=>cb.onchange=()=>{const i=+cb.dataset.g;if(cb.checked)groups[i].addTo(m);else m.removeLayer(groups[i]);});
     d.querySelector('.ml-hd').onclick=()=>{const o=d.classList.toggle('open');d.querySelector('.ml-hd').textContent='🧭 美食地图图例 '+(o?'▴':'▾');};
